@@ -14,11 +14,11 @@ class AuthPage extends StatelessWidget {
       body: StreamBuilder<User?>(
         stream: authService.checkAuthState(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          // user logged
+          // user logged -> show homepage
           if (snapshot.hasData) {
             return const HomePage();
           }
-          // user not logged
+          // user not logged -> show login page
           else {
             return const LoginPage();
           }
