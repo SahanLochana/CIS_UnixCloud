@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:student_manegment_app/core_features/Data/Models/doc_modal.dart';
+import 'package:student_manegment_app/core_features/Data/Remote/firebase_services.dart';
+import 'package:student_manegment_app/core_features/Provider/current_status_provider.dart';
+import 'package:student_manegment_app/core_features/presantation/Components/item_tile.dart';
+import 'package:student_manegment_app/core_features/presantation/Components/loading_wave.dart';
+
+class ItemListWidget extends StatelessWidget {
+  final String moduleId;
+  const ItemListWidget({
+    super.key,
+    required this.moduleId,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    FirebaseServices services = FirebaseServices();
+    return Consumer<StatusProvider>(
+      builder: (context, value, child) {
+        String category = value.selectedCategory;
+        return FutureBuilder(
+            future: services.getdocs(moduleId, category),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: LoadingWave());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return const Center(child: Text('No data available'));
+              }
+
+              List<DocDataModal> itemList = snapshot.data;
+              return ListView.builder(
+                itemCount: itemList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  DocDataModal eachDocDataModal = itemList[index];
+                  return Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: ItemTile(docDataModal: eachDocDataModal));
+                },
+              );
+            });
+      },
+    );
+  }
+}

@@ -1,0 +1,64 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:student_manegment_app/Routes/route_constant.dart';
+import 'package:student_manegment_app/core_features/presantation/Pages/admin_board.dart';
+import 'package:student_manegment_app/core_features/presantation/Pages/auth_page.dart';
+import 'package:student_manegment_app/core_features/presantation/Pages/home_page.dart';
+import 'package:student_manegment_app/core_features/presantation/Pages/item_page.dart';
+import 'package:student_manegment_app/core_features/presantation/Pages/modules_page.dart';
+import 'package:student_manegment_app/core_features/presantation/Pages/pdf_view_page.dart';
+
+class MyRouteConfig {
+  GoRouter routers = GoRouter(
+    routes: [
+      GoRoute(
+        path: "/",
+        name: RouterConstants.authRouteName,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: AuthPage());
+        },
+      ),
+      GoRoute(
+        path: "/home",
+        name: RouterConstants.homeRouteName,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: HomePage());
+        },
+      ),
+      GoRoute(
+        path: "/modules",
+        name: RouterConstants.modulesRouteName,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: ModulePage());
+        },
+      ),
+      GoRoute(
+        path: "/items/:moduleId",
+        name: RouterConstants.itemsRouteName,
+        pageBuilder: (context, state) {
+          final mId = state.pathParameters["moduleId"];
+          return MaterialPage(
+              child: ItemsPage(
+            moduleId: mId!,
+          ));
+        },
+      ),
+      GoRoute(
+        path: "/view/:url",
+        name: RouterConstants.pdfViewRouteName,
+        pageBuilder: (context, state) {
+          final url = state.pathParameters["url"];
+          return MaterialPage(child: PdfViewPage(url: url!));
+        },
+      ),
+      GoRoute(
+        path: "/admin/:uid",
+        name: RouterConstants.adminBoardRouteName,
+        pageBuilder: (context, state) {
+          final uid = state.pathParameters["uid"];
+          return MaterialPage(child: AdminBoard(uid: uid!));
+        },
+      ),
+    ],
+  );
+}
