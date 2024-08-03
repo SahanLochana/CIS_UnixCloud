@@ -11,6 +11,8 @@ import 'package:student_manegment_app/core_features/presantation/Pages/pdf_view_
 class MyRouteConfig {
   GoRouter routers = GoRouter(
     routes: [
+      // auth page
+      // when app start show first page
       GoRoute(
         path: "/",
         name: RouterConstants.authRouteName,
@@ -18,6 +20,8 @@ class MyRouteConfig {
           return const MaterialPage(child: AuthPage());
         },
       ),
+
+      // home page
       GoRoute(
         path: "/home",
         name: RouterConstants.homeRouteName,
@@ -25,6 +29,8 @@ class MyRouteConfig {
           return const MaterialPage(child: HomePage());
         },
       ),
+
+      // module page
       GoRoute(
         path: "/modules",
         name: RouterConstants.modulesRouteName,
@@ -32,6 +38,9 @@ class MyRouteConfig {
           return const MaterialPage(child: ModulePage());
         },
       ),
+
+      // item page
+      // pass module id
       GoRoute(
         path: "/items/:moduleId",
         name: RouterConstants.itemsRouteName,
@@ -43,6 +52,8 @@ class MyRouteConfig {
           ));
         },
       ),
+      // pdf view page
+      // pass pdf url
       GoRoute(
         path: "/view/:url",
         name: RouterConstants.pdfViewRouteName,
@@ -51,6 +62,9 @@ class MyRouteConfig {
           return MaterialPage(child: PdfViewPage(url: url!));
         },
       ),
+
+      // admin page
+      // pass user id
       GoRoute(
         path: "/admin/:uid",
         name: RouterConstants.adminBoardRouteName,

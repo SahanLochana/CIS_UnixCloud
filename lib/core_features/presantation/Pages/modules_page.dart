@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:student_manegment_app/core_features/Provider/current_status_provider.dart';
 import 'package:student_manegment_app/core_features/presantation/Widgets/module_tile_list_widget.dart';
 
 class ModulePage extends StatelessWidget {
@@ -17,9 +15,9 @@ class ModulePage extends StatelessWidget {
           color: Colors.white,
         ),
         backgroundColor: Colors.grey.shade900,
-        title: Text(
-          Provider.of<StatusProvider>(context).isUserAdmin.toString(),
-          style: const TextStyle(color: Colors.white),
+        title: const Text(
+          "Modules",
+          style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
       ),

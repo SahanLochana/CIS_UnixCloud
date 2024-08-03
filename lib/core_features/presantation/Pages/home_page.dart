@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
     loadData();
   }
 
+  // save user id to provider
   void loadData() {
     User? currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser != null) {
@@ -29,10 +30,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // get user role
+    // get current user
     User? currentUser = FirebaseAuth.instance.currentUser;
-    // StatusProvider provider = StatusProvider();
-    // provider.checkUserIsAdmin(currentUser!.uid);
 
     return Consumer<StatusProvider>(
       builder: (context, value, child) {
@@ -46,21 +45,21 @@ class _HomePageState extends State<HomePage> {
             ),
             backgroundColor: Colors.grey.shade900,
             title: Text(
-              currentUser!.uid.toString(),
+              currentUser!.uid.toString(), //TODO : change to better one
               style: const TextStyle(color: Colors.white),
             ),
             centerTitle: true,
             actions: [
               IconButton(
-                  onPressed: () {
-                    value.checkUserIsAdmin(currentUser.uid);
-                  },
-                  icon: const Icon(Icons.notifications))
+                onPressed: () {},
+                icon: const Icon(Icons.notifications),
+              )
             ],
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Catogory tile holdiing container
               Container(
                 decoration: BoxDecoration(
                     color: Colors.grey.shade900,
@@ -75,6 +74,7 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: Text(
+                  // TODO : wrap with column and create feture for show annoucements
                   "Annoucement",
                   style: TextStyle(
                     color: Colors.grey.shade900,

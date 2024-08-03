@@ -13,16 +13,21 @@ class ModuleListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     FirebaseServices services = FirebaseServices();
     return FutureBuilder(
+        // Get data from database.
         future: services.getModules("modules"),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+          // Show loading animation while data loading
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: LoadingWave());
           } else if (snapshot.hasError) {
+            // Show error
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            // if there not data for show
             return const Center(child: Text('No data available'));
           }
 
+          // If has data show them in a list view builder
           List<ModuleModel> moduleList = snapshot.data;
           return ListView.builder(
             itemCount: moduleList.length,

@@ -20,18 +20,7 @@ class _LoginPageState extends State<LoginPage> {
 
   //sign in
   void signIn() async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == "invalid-credential") {
-        // print('plz check your email & password!');
-      } else {
-        // print('error : ${e.code}.');
-      }
-    }
+    authService.signIn(emailController.text, passwordController.text);
   }
 
   @override
@@ -47,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            //Icon
+            //Icon TODO : add app icon
             const Icon(
               Icons.lock,
               color: Colors.black,

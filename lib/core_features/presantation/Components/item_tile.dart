@@ -11,7 +11,7 @@ class ItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // navigate to pdf view page
+        // navigate to pdf view page.
         GoRouter.of(context).pushNamed(
           RouterConstants.pdfViewRouteName,
           pathParameters: {"url": docDataModal.url},

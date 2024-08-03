@@ -20,7 +20,7 @@ class CatoTileRound extends StatelessWidget {
       builder: (context, value, child) {
         return GestureDetector(
           onTap: () {
-            // store selected category
+            // store selected category.
             value.typeUpdater(type);
 
             // navigate to module page

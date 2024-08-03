@@ -22,14 +22,18 @@ class ItemListWidget extends StatelessWidget {
         return FutureBuilder(
             future: services.getdocs(moduleId, category),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
+              // show loading animation while data load
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: LoadingWave());
+                // when got error
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
+                // if ther no data
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                 return const Center(child: Text('No data available'));
               }
 
+              // if has data
               List<DocDataModal> itemList = snapshot.data;
               return ListView.builder(
                 itemCount: itemList.length,

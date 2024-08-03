@@ -25,6 +25,7 @@ class FirebaseServices {
     return modulesList;
   }
 
+  // Snapshot data convert to moduleModel
   ModuleModel toModuleModel(Map moduleData) {
     String moduleName = moduleData["moduleName"];
     String moduleId = moduleData["moduleId"];
@@ -39,7 +40,7 @@ class FirebaseServices {
         for (var docSnapshot in querySnapshot.docs) {
           Map docData = docSnapshot.data();
           if (docData.isEmpty) {
-            throw "File Not Found";
+            throw "Files Not Found";
           }
           DocDataModal docDataModel = toDocDataModal(docData);
           docsList.add(docDataModel);
@@ -51,6 +52,7 @@ class FirebaseServices {
     return docsList;
   }
 
+  // Snapshot data conver to DocDataModel
   DocDataModal toDocDataModal(Map docData) {
     String fileName = docData["fileName"];
     String url = docData["url"];

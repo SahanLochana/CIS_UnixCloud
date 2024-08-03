@@ -14,13 +14,17 @@ class PdfViewPage extends StatefulWidget {
 
 class _PdfViewPageState extends State<PdfViewPage> {
   late PdfControllerPinch pdfControllerPinch;
+
+  // initialize page numbers
   int currentPage = 1, allPages = 0;
 
+  // holding pdf loading state
   bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
+    // TODO : find way to handle error
     pdfControllerPinch = PdfControllerPinch(
         document: PdfDocument.openData(InternetFile.get(widget.url)));
   }

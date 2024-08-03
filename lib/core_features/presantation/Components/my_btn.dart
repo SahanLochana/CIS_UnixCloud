@@ -4,6 +4,8 @@ class MyBtn extends StatelessWidget {
   final Function()? onTap;
   const MyBtn({super.key, required this.onTap});
 
+// TODO :  create custom flat buttn with splash effect
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

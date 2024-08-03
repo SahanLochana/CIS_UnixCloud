@@ -4,6 +4,7 @@ import 'package:student_manegment_app/core_features/Data/Models/module_model.dar
 import 'package:student_manegment_app/Routes/route_constant.dart';
 
 class ModuleTile extends StatelessWidget {
+  // get moduleModel
   final ModuleModel moduleModel;
   const ModuleTile({
     super.key,
@@ -14,7 +15,7 @@ class ModuleTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // navigate to utem page
+        // navigate to item page
 
         GoRouter.of(context).pushNamed(RouterConstants.itemsRouteName,
             pathParameters: {"moduleId": moduleModel.moduleId});

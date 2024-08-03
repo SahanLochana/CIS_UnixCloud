@@ -9,9 +9,17 @@ class AuthService {
   // user signIn
   void signIn(String emailAddress, String password) async {
     //TODO : try catch
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailAddress,
-      password: password,
-    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailAddress,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "invalid-credential") {
+        // print('plz check your email & password!');
+      } else {
+        // print('error : ${e.code}.');
+      }
+    }
   }
 }

@@ -8,9 +8,10 @@ class DrawerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        // navigate
+        // TODO : navigate to module
       },
-      leading: const Icon(Icons.book_rounded),
+
+      leading: const Icon(Icons.book_rounded), //TODO : change icon
       title: Text(tileTitle),
       trailing: const Icon(Icons.chevron_right_rounded),
     );

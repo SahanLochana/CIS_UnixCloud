@@ -20,10 +20,13 @@ class MyDrawer extends StatelessWidget {
               children: [
                 Column(
                   children: [
+                    // drower tiles
+                    // TODO : create function to navigate model page
                     const DrawerHeader(child: Center(child: Text("U S E R"))),
                     const DrawerTile(tileTitle: "N o t e s"),
                     const DrawerTile(tileTitle: "S l i d e s"),
                     const DrawerTile(tileTitle: "R e s o u c e s"),
+                    // show this only user is a admin
                     if (value.isUserAdmin)
                       const DrawerTile(tileTitle: "A d m i n")
                   ],
