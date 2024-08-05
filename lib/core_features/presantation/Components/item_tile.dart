@@ -9,6 +9,7 @@ class ItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double deviceWidth = MediaQuery.sizeOf(context).width;
     return GestureDetector(
       onTap: () {
         // navigate to pdf view page.
@@ -23,10 +24,19 @@ class ItemTile extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(docDataModal.fileName),
+            SizedBox(
+              width: deviceWidth - 120,
+              child: Text(
+                docDataModal.fileName,
+                softWrap: true,
+              ),
+            ),
+            IconButton(
+                onPressed: () {}, icon: const Icon(Icons.download_rounded))
           ],
         ),
       ),
