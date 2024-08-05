@@ -5,16 +5,21 @@ class DownloadTaskProvider extends ChangeNotifier {
   // instance of FileDownload
   FileDownload fileDownload = FileDownload();
   // progress veriable
-  double cureentProgress = 0.0;
+  Map<String, double> _downloadTasks = {};
+
+  Map<String, double> get downloadTasks => _downloadTasks;
 
   // task state veriable
   // 0 = running, 1 = pouse, -1 = cancel
   late int stateCode;
 
   // progress updater
-  void updateProgress() {
-    fileDownload.downloadFile("", "", (progress) {
-      cureentProgress = progress;
+  void updateProgress(String cloudPath, String fileName) {
+    fileDownload.downloadFile(cloudPath, fileName, (progress) {
+      _downloadTasks[fileName] = progress;
+      print(downloadTasks[fileName].toString());
+      print(progress);
+      notifyListeners();
     });
   }
 

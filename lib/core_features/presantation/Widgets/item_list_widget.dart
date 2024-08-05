@@ -41,7 +41,10 @@ class ItemListWidget extends StatelessWidget {
                   DocDataModal eachDocDataModal = itemList[index];
                   return Padding(
                       padding: const EdgeInsets.only(bottom: 10.0),
-                      child: ItemTile(docDataModal: eachDocDataModal));
+                      child: ItemTile(
+                        docDataModal: eachDocDataModal,
+                        moduleId: moduleId,
+                      ));
                 },
               );
             });

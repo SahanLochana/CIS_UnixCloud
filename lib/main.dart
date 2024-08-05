@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:student_manegment_app/core_features/Provider/current_status_provider.dart';
 import 'package:student_manegment_app/Routes/routes_config.dart';
+import 'package:student_manegment_app/features/download_file/provider/download_task_provider.dart';
 import 'package:student_manegment_app/firebase_options.dart';
 import 'package:student_manegment_app/core_features/presantation/theme/theme_data.dart';
 
@@ -25,8 +26,15 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => StatusProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<StatusProvider>(
+          create: (context) => StatusProvider(),
+        ),
+        ChangeNotifierProvider<DownloadTaskProvider>(
+          create: (context) => DownloadTaskProvider(),
+        )
+      ],
       child: MaterialApp.router(
         routerConfig: MyRouteConfig().routers,
         theme: myTheme,
