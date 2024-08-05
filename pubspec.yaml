@@ -76,6 +76,7 @@ flutter:
   assets:
     - assets\loading_wave.json
     - assets\file_loading.json
+    - assets\logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

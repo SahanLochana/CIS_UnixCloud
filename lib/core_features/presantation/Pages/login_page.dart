@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_manegment_app/core_features/Data/Remote/auth_service.dart';
 import 'package:student_manegment_app/core_features/presantation/Components/login_text_field.dart';
+import 'package:student_manegment_app/core_features/presantation/Components/msg_tile.dart';
 import 'package:student_manegment_app/core_features/presantation/Components/my_btn.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,7 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   AuthService authService = AuthService();
-  bool wrongCred = false;
+  bool wrongCred = true;
 
   // texteditingcontollers
   TextEditingController emailController = TextEditingController();
@@ -34,11 +35,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 100),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -53,7 +55,8 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 20,
             ),
-            if (wrongCred) Text("wrong email/password "),
+            if (wrongCred) MsgTile(),
+
             // Email
             // LoginTextField
             LoginTextField(
