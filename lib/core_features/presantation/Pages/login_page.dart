@@ -13,7 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   AuthService authService = AuthService();
-  bool wrongCred = true;
+  bool wrongCred = false;
 
   // texteditingcontollers
   TextEditingController emailController = TextEditingController();
@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 100),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -55,7 +55,10 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 20,
             ),
-            if (wrongCred) MsgTile(),
+            if (wrongCred)
+              const ErrorMsgTile(
+                errorMSg: "Check your email/password",
+              ),
 
             // Email
             // LoginTextField

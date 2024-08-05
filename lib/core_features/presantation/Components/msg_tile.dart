@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class MsgTile extends StatelessWidget {
-  const MsgTile({super.key});
+class ErrorMsgTile extends StatelessWidget {
+  final String errorMSg;
+  const ErrorMsgTile({super.key, required this.errorMSg});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +11,7 @@ class MsgTile extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             color: Colors.red.shade100,
-            border: Border.all(color: Colors.red.shade300, width: 2),
+            border: Border.all(color: Colors.red.shade200, width: 2),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
@@ -24,7 +25,7 @@ class MsgTile extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  "Check your email/password",
+                  errorMSg,
                   style: TextStyle(fontSize: 16, color: Colors.red.shade600),
                 )
               ],

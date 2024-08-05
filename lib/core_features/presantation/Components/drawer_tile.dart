@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:student_manegment_app/Routes/route_constant.dart';
 
 class DrawerTile extends StatelessWidget {
   final String tileTitle;
@@ -8,7 +10,8 @@ class DrawerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        // TODO : navigate to module
+        GoRouter.of(context).pushNamed(RouterConstants.adminBoardRouteName,
+            pathParameters: {"uid": "22CIS0334"});
       },
 
       leading: const Icon(Icons.book_rounded), //TODO : change icon

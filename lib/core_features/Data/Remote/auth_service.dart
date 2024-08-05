@@ -16,11 +16,9 @@ class AuthService {
       return 1;
     } on FirebaseAuthException catch (e) {
       if (e.code == "invalid-credential") {
-        print(e.code);
         return 2;
         // throw 'plz check your email & password!';
       } else {
-        print('error : ${e.code}.');
         return 3;
         // throw "${e.code}";
       }

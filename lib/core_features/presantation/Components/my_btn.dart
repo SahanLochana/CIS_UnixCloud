@@ -12,7 +12,7 @@ class MyBtn extends StatelessWidget {
       onPressed: onTap,
       style: ButtonStyle(
         elevation: const MaterialStatePropertyAll(0),
-        backgroundColor: MaterialStatePropertyAll(Color(0xFF406DEE)),
+        backgroundColor: MaterialStatePropertyAll(const Color(0xFF406DEE)),
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

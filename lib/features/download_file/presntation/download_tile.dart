@@ -43,6 +43,6 @@ class _DownloadTileState extends State<DownloadTile> {
       ); //TODO replace with real path and name
     }
 
-    return Scaffold();
+    return const Scaffold();
   }
 }
