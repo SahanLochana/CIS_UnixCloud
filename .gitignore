@@ -45,3 +45,4 @@ app.*.map.json
 
 pagination.drawio
 firebase_options.dart
+firebase.json

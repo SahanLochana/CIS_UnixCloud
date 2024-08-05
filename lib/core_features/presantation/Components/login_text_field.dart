@@ -5,11 +5,12 @@ class LoginTextField extends StatelessWidget {
   final String hintText;
   final bool isObsText;
 
-  const LoginTextField(
-      {super.key,
-      required this.hintText,
-      required this.controller,
-      required this.isObsText});
+  const LoginTextField({
+    super.key,
+    required this.hintText,
+    required this.controller,
+    required this.isObsText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +23,20 @@ class LoginTextField extends StatelessWidget {
         controller: controller,
         obscureText: isObsText,
         decoration: InputDecoration(
-            fillColor: Theme.of(context).cardColor,
-            filled: true,
-            border: InputBorder.none,
-            hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey.shade600),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey.shade500),
-            ),
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: Colors.grey.shade200))),
+          fillColor: Theme.of(context).cardColor,
+          filled: true,
+          border: InputBorder.none,
+          hintText: hintText,
+          hintStyle: TextStyle(color: Colors.grey.shade600),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: Colors.grey.shade500),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: Colors.grey.shade200),
+          ),
+        ),
       ),
     );
   }
