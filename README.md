@@ -1,16 +1,20 @@
-# student_manegment_app
+# CIS UnixCloud
 
-A new Flutter project.
+This app is developed for easy storage, downloading, and online reading of PDF files.
 
-## Getting Started
+## v1.0.0
+This version focuses on the core functionality of the app, mainly:
+- **Authentication**: Secure login and registration for users.
+- **Viewing PDF files**: Ability to view PDF files directly within the app.
 
-This project is a starting point for a Flutter application.
+### Features
+- **User Authentication**: Secure login and registration for users.
+- **PDF Viewing**: Ability to view PDF files directly within the app.
 
-A few resources to get you started if this is your first Flutter project:
+### Upcoming Features
+- **PDF Downloading**: Option to download PDF files to your device.
+- **Admin Panel**: Admins can upload files to storage and send announcements.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## v1.0.1
