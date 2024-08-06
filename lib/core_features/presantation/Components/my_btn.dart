@@ -27,6 +27,7 @@ class MyBtn extends StatelessWidget {
             color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 18,
+            fontFamily: "dmsans",
           ),
         ),
       ),
