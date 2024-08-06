@@ -4,7 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:student_manegment_app/core_features/Data/Models/doc_modal.dart';
 import 'package:student_manegment_app/Routes/route_constant.dart';
 import 'package:student_manegment_app/core_features/Provider/current_status_provider.dart';
+import 'package:student_manegment_app/features/download_file/data/remote/file_download.dart';
 import 'package:student_manegment_app/features/download_file/provider/download_task_provider.dart';
+import 'package:student_manegment_app/features/toast_massege/toast_massege.dart';
+import 'package:toastification/toastification.dart';
 
 class ItemTile extends StatefulWidget {
   final String moduleId;
@@ -21,6 +24,9 @@ class _ItemTileState extends State<ItemTile> {
   Widget build(BuildContext context) {
     final stateProvider = Provider.of<StatusProvider>(context);
     final downloadProvider = Provider.of<DownloadTaskProvider>(context);
+    int? showBar =
+        downloadProvider.downloadTasksFlags[widget.docDataModal.fileName];
+    print("showbar ${widget.docDataModal.fileName} $showBar");
 
     // cloud path
     final cloudPath =
@@ -56,19 +62,43 @@ class _ItemTileState extends State<ItemTile> {
                     style: TextStyle(fontFamily: "dmsans"),
                   ),
                 ),
-                IconButton(
-                    onPressed: () {
-                      print(cloudPath);
-                      downloadProvider.updateProgress(
-                          cloudPath, widget.docDataModal.fileName);
-                    },
-                    icon: const Icon(Icons.download_rounded))
+                showBar == 1
+                    ? IconButton(
+                        onPressed: () {}, icon: const Icon(Icons.close))
+                    : IconButton(
+                        onPressed: () async {
+                          FileDownload download = FileDownload();
+                          bool isExists = await download
+                              .checkFileExists(widget.docDataModal.fileName);
+                          ToastMassege msg = ToastMassege();
+                          if (!isExists) {
+                            print(cloudPath);
+                            downloadProvider.updateProgress(context, cloudPath,
+                                widget.docDataModal.fileName);
+                            msg.toastMsg(
+                              context,
+                              "Downloading",
+                              widget.docDataModal.fileName,
+                              ToastificationType.info,
+                            );
+                          } else {
+                            msg.toastMsg(
+                                context,
+                                "File Alredy exists",
+                                widget.docDataModal.fileName,
+                                ToastificationType.info);
+                          }
+                        },
+                        icon: const Icon(Icons.download_rounded))
               ],
             ),
-            LinearProgressIndicator(
-              value:
-                  downloadProvider.downloadTasks[widget.docDataModal.fileName],
-            )
+            showBar == 1
+                ? LinearProgressIndicator(
+                    color: Colors.green.shade300,
+                    value: downloadProvider
+                        .downloadTasks[widget.docDataModal.fileName],
+                  )
+                : Container(),
           ],
         ),
       ),

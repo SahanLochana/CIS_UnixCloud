@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
 class ToastMassege {
-  void toastMsg(BuildContext context, String title, String description) {
+  void toastMsg(BuildContext context, String title, String description,
+      ToastificationType type) {
     toastification.show(
       context: context,
-      type: ToastificationType.success,
+      type: type,
       style: ToastificationStyle.minimal,
       title: Text(title),
       description: Text(description),
@@ -14,6 +15,7 @@ class ToastMassege {
       borderRadius: BorderRadius.circular(12.0),
       boxShadow: lowModeShadow,
       dragToClose: true,
+      showProgressBar: false,
     );
   }
 }

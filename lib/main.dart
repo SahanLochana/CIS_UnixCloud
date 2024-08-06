@@ -6,6 +6,7 @@ import 'package:student_manegment_app/Routes/routes_config.dart';
 import 'package:student_manegment_app/features/download_file/provider/download_task_provider.dart';
 import 'package:student_manegment_app/firebase_options.dart';
 import 'package:student_manegment_app/core_features/presantation/theme/theme_data.dart';
+import 'package:toastification/toastification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,19 +27,21 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<StatusProvider>(
-          create: (context) => StatusProvider(),
+    return ToastificationWrapper(
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<StatusProvider>(
+            create: (context) => StatusProvider(),
+          ),
+          ChangeNotifierProvider<DownloadTaskProvider>(
+            create: (context) => DownloadTaskProvider(),
+          )
+        ],
+        child: MaterialApp.router(
+          routerConfig: MyRouteConfig().routers,
+          theme: myTheme,
+          debugShowCheckedModeBanner: false,
         ),
-        ChangeNotifierProvider<DownloadTaskProvider>(
-          create: (context) => DownloadTaskProvider(),
-        )
-      ],
-      child: MaterialApp.router(
-        routerConfig: MyRouteConfig().routers,
-        theme: myTheme,
-        debugShowCheckedModeBanner: false,
       ),
     );
   }
