@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 ThemeData myTheme = ThemeData(
-    // TODO : change colors
+    primaryColorLight: const Color(0xFF3D5A80),
     scaffoldBackgroundColor: Colors.grey.shade300,
     primaryColor: const Color(0xFFF78361),
     cardColor: Colors.grey.shade200,
-    fontFamily: "dmsans");
+    appBarTheme: AppBarTheme(
+      centerTitle: true,
+      backgroundColor: const Color(0xFF3D5A80),
+      iconTheme: IconThemeData(color: Colors.white),
+    ));

@@ -40,15 +40,11 @@ class _HomePageState extends State<HomePage> {
           drawer: const MyDrawer(),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: AppBar(
-            iconTheme: const IconThemeData(
-              color: Colors.white,
-            ),
-            backgroundColor: Colors.grey.shade900,
+            // backgroundColor: const Color(0xFF3D5A80),
             title: Text(
               currentUser!.uid.toString(), //TODO : change to better one
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white, fontFamily: "dmsans"),
             ),
-            centerTitle: true,
             actions: [
               IconButton(
                 onPressed: () {},
@@ -62,7 +58,7 @@ class _HomePageState extends State<HomePage> {
               // Catogory tile holdiing container
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.grey.shade900,
+                    color: const Color(0xFF3D5A80),
                     borderRadius: const BorderRadius.vertical(
                         bottom: Radius.circular(20))),
                 width: double.infinity,
@@ -77,6 +73,7 @@ class _HomePageState extends State<HomePage> {
                   // TODO : wrap with column and create feture for show annoucements
                   "Annoucement",
                   style: TextStyle(
+                    fontFamily: "dmsans",
                     color: Colors.grey.shade900,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

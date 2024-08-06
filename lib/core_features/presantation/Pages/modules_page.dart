@@ -11,10 +11,6 @@ class ModulePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ),
-        backgroundColor: Colors.grey.shade900,
         title: const Text(
           "Modules",
           style: TextStyle(color: Colors.white),

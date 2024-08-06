@@ -43,7 +43,10 @@ class MyDrawer extends StatelessWidget {
                         await FirebaseAuth.instance.signOut();
                       },
                       leading: const Icon(Icons.book_rounded),
-                      title: const Text("LogOut"),
+                      title: const Text(
+                        "LogOut",
+                        style: TextStyle(fontFamily: "dmsans"),
+                      ),
                       trailing: const Icon(Icons.logout_rounded),
                     )
                   ],

@@ -53,6 +53,7 @@ class _ItemTileState extends State<ItemTile> {
                   child: Text(
                     widget.docDataModal.fileName,
                     softWrap: true,
+                    style: TextStyle(fontFamily: "dmsans"),
                   ),
                 ),
                 IconButton(

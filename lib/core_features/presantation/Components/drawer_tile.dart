@@ -15,7 +15,10 @@ class DrawerTile extends StatelessWidget {
       },
 
       leading: const Icon(Icons.book_rounded), //TODO : change icon
-      title: Text(tileTitle),
+      title: Text(
+        tileTitle,
+        style: TextStyle(fontFamily: "dmsans"),
+      ),
       trailing: const Icon(Icons.chevron_right_rounded),
     );
   }

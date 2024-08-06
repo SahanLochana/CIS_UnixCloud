@@ -26,7 +26,10 @@ class ErrorMsgTile extends StatelessWidget {
                 ),
                 Text(
                   errorMSg,
-                  style: TextStyle(fontSize: 16, color: Colors.red.shade600),
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.red.shade600,
+                      fontFamily: "dmsans"),
                 )
               ],
             ),

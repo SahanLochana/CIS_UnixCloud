@@ -45,9 +45,9 @@ class ModuleTile extends StatelessWidget {
                 child: Text(
                   moduleModel.moduleName,
                   style: TextStyle(
-                    color: Colors.grey.shade900,
-                    fontSize: 16,
-                  ),
+                      color: Colors.grey.shade900,
+                      fontSize: 16,
+                      fontFamily: "dmsans"),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),

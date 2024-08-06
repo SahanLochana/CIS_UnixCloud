@@ -15,9 +15,6 @@ class ItemsPage extends StatelessWidget {
           "Files",
           style: TextStyle(color: Colors.white),
         ),
-        centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.white),
-        backgroundColor: Colors.grey.shade900,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
