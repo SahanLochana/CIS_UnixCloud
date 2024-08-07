@@ -10,8 +10,10 @@ class AdminBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: const Text("admin board"),
+        title: Text(
+          "admin board",
+          style: TextStyle(fontFamily: "dmsans", color: Colors.white),
+        ),
       ),
       body: const Padding(
         padding: EdgeInsets.all(20.0),

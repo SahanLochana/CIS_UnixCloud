@@ -5,6 +5,7 @@ class StatusProvider extends ChangeNotifier {
   // verialble for store states
   String _selectedType = "";
   bool _isAdmin = false;
+  late String _uid;
 
   // for store user selected category (note,slide....)
   void typeUpdater(String type) {
@@ -17,6 +18,7 @@ class StatusProvider extends ChangeNotifier {
     FirebaseServices service = FirebaseServices();
     bool isUserAdmin = await service.checkUserRole(uId);
     _isAdmin = isUserAdmin;
+    _uid = uId;
     notifyListeners();
   }
 
@@ -28,5 +30,6 @@ class StatusProvider extends ChangeNotifier {
 
   // getters
   String get selectedCategory => _selectedType;
+  String get uid => _uid;
   bool get isUserAdmin => _isAdmin;
 }
