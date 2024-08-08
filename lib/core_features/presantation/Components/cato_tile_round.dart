@@ -5,12 +5,12 @@ import 'package:student_manegment_app/core_features/Provider/current_status_prov
 import 'package:student_manegment_app/Routes/route_constant.dart';
 
 class CatoTileRound extends StatelessWidget {
-  final IconData tielIcon;
+  final String assetsPath;
   final String title;
   final String type;
   const CatoTileRound(
       {super.key,
-      required this.tielIcon,
+      required this.assetsPath,
       required this.title,
       required this.type});
 
@@ -37,7 +37,15 @@ class CatoTileRound extends StatelessWidget {
                   ),
                   height: 70,
                   width: 70,
-                  child: Icon(tielIcon),
+                  child: SizedBox(
+                    child: Center(
+                      child: Image.asset(
+                        height: 35,
+                        width: 35,
+                        assetsPath,
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(
                   height: 10,

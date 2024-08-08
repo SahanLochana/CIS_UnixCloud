@@ -73,9 +73,9 @@ class _PopUpWindowState extends State<PopUpWindow> {
                 style: _style,
                 value: selectedModuleId,
                 items: [
-                  DropdownMenuItem(value: "is1100", child: Text("IS1100")),
                   DropdownMenuItem(value: "is1101", child: Text("IS1101")),
                   DropdownMenuItem(value: "is1102", child: Text("IS1102")),
+                  DropdownMenuItem(value: "is1103", child: Text("IS1103")),
                   DropdownMenuItem(value: "is1104", child: Text("IS1104")),
                   DropdownMenuItem(value: "is1105", child: Text("IS1105")),
                   DropdownMenuItem(value: "is1106", child: Text("IS1106")),

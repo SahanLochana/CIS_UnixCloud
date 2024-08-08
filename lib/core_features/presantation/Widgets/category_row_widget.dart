@@ -10,7 +10,7 @@ class CategoryRowWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CatoTileRound(
-          tielIcon: Icons.video_file,
+          assetsPath: "assets\\icons\\document.png",
           title: "Notes",
           type: "Notes",
         ),
@@ -18,7 +18,7 @@ class CategoryRowWidget extends StatelessWidget {
           width: 15,
         ),
         CatoTileRound(
-          tielIcon: Icons.book,
+          assetsPath: "assets\\icons\\slide.png",
           title: "Slides",
           type: "Slides",
         ),
@@ -26,7 +26,7 @@ class CategoryRowWidget extends StatelessWidget {
           width: 15,
         ),
         CatoTileRound(
-          tielIcon: Icons.book,
+          assetsPath: "assets\\icons\\resource.png",
           title: "Resouces",
           type: "resouces",
         ),

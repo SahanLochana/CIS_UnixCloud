@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:student_manegment_app/core_features/Data/Models/doc_modal.dart';
@@ -54,8 +55,16 @@ class _ItemTileState extends State<ItemTile> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Image.asset(
+                  "assets\\icons\\pdf round.png",
+                  height: 25,
+                  width: 25,
+                ),
                 SizedBox(
-                  width: deviceWidth - 120,
+                  width: 10,
+                ),
+                SizedBox(
+                  width: deviceWidth - 155,
                   child: Text(
                     widget.docDataModal.fileName,
                     softWrap: true,
@@ -89,7 +98,13 @@ class _ItemTileState extends State<ItemTile> {
                                 ToastificationType.info);
                           }
                         },
-                        icon: const Icon(Icons.download_rounded))
+                        icon: Center(
+                          child: Image.asset(
+                            "assets\\icons\\download.png",
+                            height: 20,
+                            width: 20,
+                          ),
+                        ))
               ],
             ),
             showBar == 1

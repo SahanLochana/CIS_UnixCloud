@@ -33,16 +33,17 @@ class AdminPageTile extends StatelessWidget {
           ),
         ),
       ),
-      child: const Padding(
-        padding: EdgeInsets.all(10.0),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.file_upload_outlined,
+            Image.asset(
+              "assets\\icons\\upload.png",
+              height: 40,
+              width: 40,
               color: const Color(0xFF3D5A80),
-              size: 52,
             ),
             SizedBox(
               height: 10,

@@ -26,16 +26,28 @@ class MyDrawer extends StatelessWidget {
                     // TODO : create function to navigate model page
                     const DrawerHeader(child: Center(child: Text("U S E R"))),
                     const DrawerTile(
+                      imagePath: "assets\\icons\\document.png",
                       tileTitle: "N o t e s",
                       type: "Notes",
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     const DrawerTile(
+                      imagePath: "assets\\icons\\slide.png",
                       tileTitle: "S l i d e s",
                       type: "Slides",
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     const DrawerTile(
+                      imagePath: "assets\\icons\\resource.png",
                       tileTitle: "R e s o u c e s",
                       type: "resouces",
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     // show this only user is a admin
                     if (value.isUserAdmin)
@@ -45,12 +57,16 @@ class MyDrawer extends StatelessWidget {
                               RouterConstants.adminBoardRouteName,
                               pathParameters: {"uid": value.uid});
                         },
-
-                        leading:
-                            const Icon(Icons.book_rounded), //TODO : change icon
+                        leading: Image.asset(
+                          "assets\\icons\\admin.png",
+                          height: 25,
+                          width: 25,
+                        ),
                         title: Text(
                           'Admin Board',
-                          style: TextStyle(fontFamily: "dmsans"),
+                          style: TextStyle(
+                              fontFamily: "dmsans",
+                              fontWeight: FontWeight.bold),
                         ),
                         trailing: const Icon(Icons.chevron_right_rounded),
                       ),

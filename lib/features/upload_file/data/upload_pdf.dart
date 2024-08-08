@@ -17,6 +17,7 @@ class UploadFile {
   ) async {
     // storage ref
     try {
+      ToastMassege msg = ToastMassege();
       final storageRef = FirebaseStorage.instance.ref();
 
       File file = File(pdfFile.files.single.path!);
@@ -32,7 +33,6 @@ class UploadFile {
       await uploadTask.snapshotEvents.listen(
         cancelOnError: true,
         (TaskSnapshot tasksnapshot) async {
-          ToastMassege msg = ToastMassege();
           WriteOnDB writeOnDB = WriteOnDB();
           switch (tasksnapshot.state) {
             case TaskState.running:
