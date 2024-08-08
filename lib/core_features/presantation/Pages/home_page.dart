@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
           appBar: AppBar(
             // backgroundColor: const Color(0xFF3D5A80),
             title: Text(
-              currentUser!.uid.toString(), //TODO : change to better one
+              currentUser!.uid.toString(),
               style: const TextStyle(color: Colors.white, fontFamily: "dmsans"),
             ),
             actions: [

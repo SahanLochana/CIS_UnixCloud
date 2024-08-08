@@ -22,12 +22,11 @@ class DrawerTile extends StatelessWidget {
           value.typeUpdater(type);
           GoRouter.of(context).pushNamed(RouterConstants.modulesRouteName);
         },
-
         leading: Image.asset(
           imagePath,
           height: 25,
           width: 25,
-        ), //TODO : change icon
+        ),
         title: Text(
           tileTitle,
           style: TextStyle(fontFamily: "dmsans", fontWeight: FontWeight.bold),

@@ -22,7 +22,7 @@ class ModuleTile extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(

@@ -6,6 +6,12 @@ import 'package:student_manegment_app/features/toast_massege/toast_massege.dart'
 import 'package:toastification/toastification.dart';
 
 class FileDownload {
+  Future<void> cancalTask(DownloadTask? task) async {
+    if (task != null) {
+      await task.cancel();
+    }
+  }
+
   Future<bool> checkFileExists(String filename) async {
     File file = File("/storage/emulated/0/Download/Uni materials/$filename");
     return await file.exists();
@@ -17,6 +23,7 @@ class FileDownload {
     String fileName,
     Function(double progress) onProgress,
     Function(int stateCode) onChangeStateCode,
+    Function(DownloadTask task) ontask,
   ) async {
     ToastMassege msg = ToastMassege();
     // path to download folder
@@ -46,9 +53,11 @@ class FileDownload {
     try {
       // download file
       final downloadtask = pathRef.writeToFile(saveFile);
+      await ontask(downloadtask);
 
       // Listen for progress
-      downloadtask.snapshotEvents.listen((tackSnapshot) async {
+      downloadtask.snapshotEvents.listen(cancelOnError: true,
+          (tackSnapshot) async {
         switch (tackSnapshot.state) {
           case TaskState.running:
             double progress = (downloadtask.snapshot.bytesTransferred /

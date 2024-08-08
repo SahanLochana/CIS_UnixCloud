@@ -8,6 +8,12 @@ import 'package:student_manegment_app/features/upload_file/data/write_on_db.dart
 import 'package:toastification/toastification.dart';
 
 class UploadFile {
+  // cancel task
+  void cancalTask(UploadTask task) {
+    task.cancel();
+  }
+
+  //upload task
   Future<void> uploadFile(
     BuildContext context,
     String moduleId,
@@ -18,6 +24,7 @@ class UploadFile {
     // storage ref
     try {
       ToastMassege msg = ToastMassege();
+
       final storageRef = FirebaseStorage.instance.ref();
 
       File file = File(pdfFile.files.single.path!);
@@ -25,6 +32,11 @@ class UploadFile {
       // storage path to save
       Reference refToFile = storageRef.child(
           "modules/semester 01/$moduleId/$category/${pdfFile.names.single!}");
+
+      try {
+        await refToFile.getMetadata();
+        return;
+      } catch (e) {}
 
       // upload
       final uploadTask = refToFile.putFile(file);
@@ -42,6 +54,7 @@ class UploadFile {
               break;
             case TaskState.canceled:
               print("Canceled");
+              onProgress(0.0);
               break;
 
             case TaskState.paused:
@@ -64,6 +77,7 @@ class UploadFile {
               break;
             case TaskState.error:
               print("error");
+              onProgress(0.0);
               break;
             default:
               print("some error");

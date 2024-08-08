@@ -23,7 +23,7 @@ class MyDrawer extends StatelessWidget {
                 Column(
                   children: [
                     // drower tiles
-                    // TODO : create function to navigate model page
+
                     const DrawerHeader(child: Center(child: Text("U S E R"))),
                     const DrawerTile(
                       imagePath: "assets\\icons\\document.png",
