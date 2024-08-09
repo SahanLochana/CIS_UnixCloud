@@ -17,4 +17,4 @@ This version focuses on the core functionality of the app, mainly:
 
 ---
 
-## v1.0.1
+## v1.2.2
