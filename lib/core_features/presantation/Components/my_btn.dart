@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 
 class MyBtn extends StatelessWidget {
+  final bool isTrying;
   final Function()? onTap;
-  const MyBtn({super.key, required this.onTap});
+  const MyBtn({super.key, required this.onTap, required this.isTrying});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onTap,
+      onPressed: isTrying ? () {} : onTap,
       style: ButtonStyle(
+        overlayColor: MaterialStateProperty.resolveWith(
+          (states) {
+            return states.contains(MaterialState.pressed)
+                ? Color.fromARGB(255, 122, 152, 191)
+                : null;
+          },
+        ),
         elevation: const MaterialStatePropertyAll(0),
         backgroundColor: const MaterialStatePropertyAll(Color(0xFF3D5A80)),
         shape: MaterialStatePropertyAll(
@@ -17,35 +25,22 @@ class MyBtn extends StatelessWidget {
           ),
         ),
       ),
-      child: const Padding(
+      child: Padding(
         padding: EdgeInsets.all(10.0),
-        child: Text(
-          "SIGN IN",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-            fontFamily: "dmsans",
-          ),
-        ),
+        child: isTrying
+            ? CircularProgressIndicator(
+                color: Colors.white,
+              )
+            : Text(
+                "SIGN IN",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  fontFamily: "dmsans",
+                ),
+              ),
       ),
     );
-    // return GestureDetector(
-    //   onTap: onTap,
-    //   child: Container(
-    //     padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-    //     decoration: BoxDecoration(
-    //       color: Colors.grey.shade900,
-    //       borderRadius: BorderRadius.circular(8),
-    //     ),
-    //     child: const Text(
-    //       "L O G I N",
-    //       style: TextStyle(
-    //         color: Colors.white,
-    //         fontWeight: FontWeight.bold,
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }

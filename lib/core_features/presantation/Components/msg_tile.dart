@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 
 class ErrorMsgTile extends StatelessWidget {
-  final String errorMSg;
-  const ErrorMsgTile({super.key, required this.errorMSg});
+  final int errorCode;
+  const ErrorMsgTile({super.key, required this.errorCode});
 
   @override
   Widget build(BuildContext context) {
+    String? errorMsg;
+    switch (errorCode) {
+      case 2:
+        errorMsg = "Check your email/password";
+        break;
+      case 3 || 5:
+        errorMsg = "check your internet connection";
+        break;
+      case 4:
+        errorMsg = "Something went wrong";
+        break;
+      default:
+        errorMsg = "Somthing went wrong";
+        break;
+    }
     return Column(
       children: [
         Container(
@@ -25,7 +40,7 @@ class ErrorMsgTile extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  errorMSg,
+                  errorMsg!,
                   style: TextStyle(
                       fontSize: 16,
                       color: Colors.red.shade600,

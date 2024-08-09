@@ -31,7 +31,8 @@ class UploadFile {
 
       // storage path to save
       Reference refToFile = storageRef.child(
-          "modules/semester 01/$moduleId/$category/${pdfFile.names.single!}");
+          "modules/semester 01/${moduleId}/$category/${pdfFile.names.single!}"
+              .toLowerCase());
 
       try {
         await refToFile.getMetadata();

@@ -149,14 +149,27 @@ class _PopUpWindowState extends State<PopUpWindow> {
         actions: [
           PopUpActionBtn(
             btnTitle: "Upload",
-            onPressed: () {
-              ToastMassege msg = ToastMassege();
-              msg.toastMsg(context, "File Uploading", filename!,
-                  ToastificationType.info);
-              print("pressed ${pickedFile!.files.single.path}");
-              value.progressListener(
-                  context, selectedModuleId, selectedCategory, pickedFile!);
-            },
+            onPressed: value.progress > 0
+                ? () {}
+                : () {
+                    ToastMassege msg = ToastMassege();
+                    try {
+                      msg.toastMsg(context, "File Uploading", filename!,
+                          ToastificationType.info);
+                      print("pressed ${pickedFile!.files.single.path}");
+                      value.progressListener(context, selectedModuleId,
+                          selectedCategory, pickedFile!);
+                    } catch (e) {
+                      if (e.toString() ==
+                          "Null check operator used on a null value") {
+                        msg.toastMsg(context, "File not selected",
+                            "Please select a file", ToastificationType.error);
+                      } else {
+                        msg.toastMsg(context, "Error", "Somthing went wrong !",
+                            ToastificationType.error);
+                      }
+                    }
+                  },
           ),
           PopUpActionBtn(
             btnTitle: "Reset",

@@ -15,13 +15,18 @@ class AuthService {
       );
       return 1;
     } on FirebaseAuthException catch (e) {
-      if (e.code == "invalid-credential") {
-        return 2;
-        // throw 'plz check your email & password!';
-      } else {
-        return 3;
-        // throw "${e.code}";
+      print(e.code);
+      switch (e.code) {
+        case "invalid-credential":
+          return 2;
+        case "network-request-failed":
+          return 3;
+        default:
+          return 4;
       }
+    } catch (e) {
+      print(e.toString());
+      return 6;
     }
   }
 }

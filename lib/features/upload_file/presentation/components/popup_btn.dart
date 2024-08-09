@@ -18,13 +18,20 @@ class PopUpActionBtn extends StatelessWidget {
           borderRadius: BorderRadius.circular(10)),
       child: ElevatedButton(
         style: ButtonStyle(
+          overlayColor: MaterialStateProperty.resolveWith(
+            (states) {
+              return states.contains(MaterialState.pressed)
+                  ? Color.fromARGB(255, 122, 152, 191)
+                  : null;
+            },
+          ),
           elevation: MaterialStatePropertyAll(0),
           shape: MaterialStatePropertyAll(RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           )),
           backgroundColor: btnTitle == "Upload"
               ? MaterialStatePropertyAll(
-                  Color(0xFF3D5A80),
+                  Color.fromARGB(255, 48, 71, 101),
                 )
               : MaterialStatePropertyAll(Colors.white),
         ),

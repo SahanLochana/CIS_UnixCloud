@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:student_manegment_app/core_features/Data/Remote/auth_service.dart';
+import 'package:student_manegment_app/core_features/presantation/Components/loading_wave.dart';
 import 'package:student_manegment_app/core_features/presantation/Components/login_text_field.dart';
 import 'package:student_manegment_app/core_features/presantation/Components/msg_tile.dart';
 import 'package:student_manegment_app/core_features/presantation/Components/my_btn.dart';
+import 'package:toastification/toastification.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,7 +15,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   AuthService authService = AuthService();
-  bool wrongCred = false;
+  int errorCode = 0;
+  bool isTrying = false;
+  bool isTimeUp = false;
 
   // texteditingcontollers
   TextEditingController emailController = TextEditingController();
@@ -21,14 +25,27 @@ class _LoginPageState extends State<LoginPage> {
 
   //sign in
   void signIn() async {
-    int state =
-        await authService.signIn(emailController.text, passwordController.text);
-    if (state == 2) {
+    setState(() {
+      isTrying = true;
+    });
+    int state = await authService
+        .signIn(emailController.text, passwordController.text)
+        .timeout(
+      Duration(seconds: 5),
+      onTimeout: () {
+        setState(() {
+          isTrying = false;
+        });
+        return 4;
+      },
+    );
+    setState(() {
+      errorCode = state;
+    });
+    if (errorCode > 0) {
       setState(() {
-        wrongCred = true;
+        isTrying = false;
       });
-      emailController.clear();
-      passwordController.clear();
     }
   }
 
@@ -63,9 +80,9 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 20,
               ),
-              if (wrongCred)
-                const ErrorMsgTile(
-                  errorMSg: "Check your email/password",
+              if (errorCode > 0)
+                ErrorMsgTile(
+                  errorCode: errorCode,
                 ),
 
               // Email
@@ -91,6 +108,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               // login button
               MyBtn(
+                isTrying: isTrying,
                 onTap: signIn,
               ),
             ],
