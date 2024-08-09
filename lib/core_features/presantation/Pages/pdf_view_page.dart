@@ -1,8 +1,8 @@
+import 'package:CIS_UnixCloud/core_features/presantation/Components/loading_wave.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/pdf_page_nav_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_file/internet_file.dart';
 import 'package:pdfx/pdfx.dart';
-import 'package:student_manegment_app/core_features/presantation/Components/loading_wave.dart';
-import 'package:student_manegment_app/core_features/presantation/Components/pdf_page_nav_btn.dart';
 
 class PdfViewPage extends StatefulWidget {
   final String url;

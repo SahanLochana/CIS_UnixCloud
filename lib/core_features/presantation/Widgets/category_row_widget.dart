@@ -1,5 +1,5 @@
+import 'package:CIS_UnixCloud/core_features/presantation/Components/cato_tile_round.dart';
 import 'package:flutter/material.dart';
-import 'package:student_manegment_app/core_features/presantation/Components/cato_tile_round.dart';
 
 class CategoryRowWidget extends StatelessWidget {
   const CategoryRowWidget({super.key});

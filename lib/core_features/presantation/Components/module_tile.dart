@@ -1,7 +1,7 @@
+import 'package:CIS_UnixCloud/Routes/route_constant.dart';
+import 'package:CIS_UnixCloud/core_features/Data/Models/module_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:student_manegment_app/core_features/Data/Models/module_model.dart';
-import 'package:student_manegment_app/Routes/route_constant.dart';
 
 class ModuleTile extends StatelessWidget {
   // get moduleModel

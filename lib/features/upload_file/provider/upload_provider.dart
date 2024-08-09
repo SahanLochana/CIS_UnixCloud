@@ -1,6 +1,6 @@
+import 'package:CIS_UnixCloud/features/upload_file/data/upload_pdf.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:student_manegment_app/features/upload_file/data/upload_pdf.dart';
 
 class UploadProvider extends ChangeNotifier {
   double _currentProgress = 0;

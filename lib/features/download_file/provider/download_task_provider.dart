@@ -1,6 +1,6 @@
+import 'package:CIS_UnixCloud/features/download_file/data/remote/file_download.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:student_manegment_app/features/download_file/data/remote/file_download.dart';
 
 class DownloadTaskProvider extends ChangeNotifier {
   // instance of FileDownload

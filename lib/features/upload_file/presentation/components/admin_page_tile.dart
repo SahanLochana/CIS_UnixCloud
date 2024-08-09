@@ -1,5 +1,5 @@
+import 'package:CIS_UnixCloud/features/upload_file/presentation/poupip_window.dart';
 import 'package:flutter/material.dart';
-import 'package:student_manegment_app/features/upload_file/presentation/poupip_window.dart';
 
 class AdminPageTile extends StatelessWidget {
   const AdminPageTile({super.key});

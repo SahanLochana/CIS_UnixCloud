@@ -1,5 +1,5 @@
+import 'package:CIS_UnixCloud/features/upload_file/presentation/components/admin_page_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:student_manegment_app/features/upload_file/presentation/components/admin_page_tile.dart';
 
 class AdminBoard extends StatelessWidget {
   final String uid;

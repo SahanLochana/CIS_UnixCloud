@@ -1,10 +1,8 @@
+import 'package:CIS_UnixCloud/core_features/Data/Remote/auth_service.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/login_text_field.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/msg_tile.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/my_btn.dart';
 import 'package:flutter/material.dart';
-import 'package:student_manegment_app/core_features/Data/Remote/auth_service.dart';
-import 'package:student_manegment_app/core_features/presantation/Components/loading_wave.dart';
-import 'package:student_manegment_app/core_features/presantation/Components/login_text_field.dart';
-import 'package:student_manegment_app/core_features/presantation/Components/msg_tile.dart';
-import 'package:student_manegment_app/core_features/presantation/Components/my_btn.dart';
-import 'package:toastification/toastification.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

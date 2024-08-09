@@ -1,6 +1,6 @@
+import 'package:CIS_UnixCloud/core_features/Data/Models/doc_modal.dart';
+import 'package:CIS_UnixCloud/core_features/Data/Models/module_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:student_manegment_app/core_features/Data/Models/doc_modal.dart';
-import 'package:student_manegment_app/core_features/Data/Models/module_model.dart';
 
 class FirebaseServices {
   var db = FirebaseFirestore.instance;

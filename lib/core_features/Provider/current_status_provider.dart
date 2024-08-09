@@ -1,5 +1,5 @@
+import 'package:CIS_UnixCloud/core_features/Data/Remote/firebase_services.dart';
 import 'package:flutter/material.dart';
-import 'package:student_manegment_app/core_features/Data/Remote/firebase_services.dart';
 
 class StatusProvider extends ChangeNotifier {
   // verialble for store states

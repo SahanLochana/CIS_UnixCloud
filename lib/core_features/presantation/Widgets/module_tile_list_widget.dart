@@ -1,8 +1,8 @@
+import 'package:CIS_UnixCloud/core_features/Data/Models/module_model.dart';
+import 'package:CIS_UnixCloud/core_features/Data/Remote/firebase_services.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/loading_wave.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/module_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:student_manegment_app/core_features/Data/Models/module_model.dart';
-import 'package:student_manegment_app/core_features/Data/Remote/firebase_services.dart';
-import 'package:student_manegment_app/core_features/presantation/Components/loading_wave.dart';
-import 'package:student_manegment_app/core_features/presantation/Components/module_tile.dart';
 
 class ModuleListWidget extends StatelessWidget {
   const ModuleListWidget({

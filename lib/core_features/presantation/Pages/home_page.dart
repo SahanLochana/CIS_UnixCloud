@@ -1,9 +1,9 @@
+import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Widgets/category_row_widget.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Widgets/my_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:student_manegment_app/core_features/Provider/current_status_provider.dart';
-import 'package:student_manegment_app/core_features/presantation/Widgets/category_row_widget.dart';
-import 'package:student_manegment_app/core_features/presantation/Widgets/my_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

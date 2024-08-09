@@ -1,8 +1,8 @@
+import 'package:CIS_UnixCloud/core_features/Data/Remote/auth_service.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/home_page.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:student_manegment_app/core_features/Data/Remote/auth_service.dart';
-import 'package:student_manegment_app/core_features/presantation/Pages/home_page.dart';
-import 'package:student_manegment_app/core_features/presantation/Pages/login_page.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});

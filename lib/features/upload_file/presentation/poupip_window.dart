@@ -1,10 +1,10 @@
+import 'package:CIS_UnixCloud/features/toast_massege/toast_massege.dart';
+import 'package:CIS_UnixCloud/features/upload_file/data/get_file.dart';
+import 'package:CIS_UnixCloud/features/upload_file/presentation/components/popup_btn.dart';
+import 'package:CIS_UnixCloud/features/upload_file/provider/upload_provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:student_manegment_app/features/toast_massege/toast_massege.dart';
-import 'package:student_manegment_app/features/upload_file/data/get_file.dart';
-import 'package:student_manegment_app/features/upload_file/presentation/components/popup_btn.dart';
-import 'package:student_manegment_app/features/upload_file/provider/upload_provider.dart';
 import 'package:toastification/toastification.dart';
 
 class PopUpWindow extends StatefulWidget {

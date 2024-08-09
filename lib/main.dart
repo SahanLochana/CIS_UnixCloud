@@ -1,12 +1,12 @@
+import 'package:CIS_UnixCloud/Routes/routes_config.dart';
+import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/theme/theme_data.dart';
+import 'package:CIS_UnixCloud/features/download_file/provider/download_task_provider.dart';
+import 'package:CIS_UnixCloud/features/upload_file/provider/upload_provider.dart';
+import 'package:CIS_UnixCloud/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:student_manegment_app/core_features/Provider/current_status_provider.dart';
-import 'package:student_manegment_app/Routes/routes_config.dart';
-import 'package:student_manegment_app/features/download_file/provider/download_task_provider.dart';
-import 'package:student_manegment_app/features/upload_file/provider/upload_provider.dart';
-import 'package:student_manegment_app/firebase_options.dart';
-import 'package:student_manegment_app/core_features/presantation/theme/theme_data.dart';
 import 'package:toastification/toastification.dart';
 
 void main() async {

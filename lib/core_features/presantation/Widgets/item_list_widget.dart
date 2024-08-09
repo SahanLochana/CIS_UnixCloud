@@ -1,10 +1,10 @@
+import 'package:CIS_UnixCloud/core_features/Data/Models/doc_modal.dart';
+import 'package:CIS_UnixCloud/core_features/Data/Remote/firebase_services.dart';
+import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/item_tile.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/loading_wave.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:student_manegment_app/core_features/Data/Models/doc_modal.dart';
-import 'package:student_manegment_app/core_features/Data/Remote/firebase_services.dart';
-import 'package:student_manegment_app/core_features/Provider/current_status_provider.dart';
-import 'package:student_manegment_app/core_features/presantation/Components/item_tile.dart';
-import 'package:student_manegment_app/core_features/presantation/Components/loading_wave.dart';
 
 class ItemListWidget extends StatelessWidget {
   final String moduleId;

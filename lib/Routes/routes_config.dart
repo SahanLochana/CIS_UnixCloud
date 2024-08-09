@@ -1,12 +1,12 @@
+import 'package:CIS_UnixCloud/Routes/route_constant.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/admin_board.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/auth_page.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/home_page.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/item_page.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/modules_page.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/pdf_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:student_manegment_app/Routes/route_constant.dart';
-import 'package:student_manegment_app/core_features/presantation/Pages/admin_board.dart';
-import 'package:student_manegment_app/core_features/presantation/Pages/auth_page.dart';
-import 'package:student_manegment_app/core_features/presantation/Pages/home_page.dart';
-import 'package:student_manegment_app/core_features/presantation/Pages/item_page.dart';
-import 'package:student_manegment_app/core_features/presantation/Pages/modules_page.dart';
-import 'package:student_manegment_app/core_features/presantation/Pages/pdf_view_page.dart';
 
 class MyRouteConfig {
   GoRouter routers = GoRouter(
