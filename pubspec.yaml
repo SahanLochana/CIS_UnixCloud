@@ -1,9 +1,9 @@
-name: student_manegment_app
-description: "A new Flutter project."
+name: CIS_UnixCloud
+description: "To the better way"
 
 publish_to: "none"
 
-version: 1.0.0+1
+version: 1.2.3+1
 
 environment:
   sdk: ">=3.3.1 <4.0.0"
@@ -32,11 +32,7 @@ dependencies:
 
   toastification: ^2.1.0
 
-  permission_handler: ^11.3.1
-
   file_picker: ^8.0.5
-
-  intl: ^0.19.0
 
   flutter_native_splash: ^2.4.0
 
