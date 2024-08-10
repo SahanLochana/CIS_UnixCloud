@@ -78,7 +78,10 @@ class _PopUpWindowState extends State<PopUpWindow> {
                   DropdownMenuItem(value: "is1103", child: Text("IS1103")),
                   DropdownMenuItem(value: "is1104", child: Text("IS1104")),
                   DropdownMenuItem(value: "is1105", child: Text("IS1105")),
-                  DropdownMenuItem(value: "is1106", child: Text("IS1106")),
+                  DropdownMenuItem(
+                      value: "is1106(p)", child: Text("IS1106(P)")),
+                  DropdownMenuItem(
+                      value: "is1106(t)", child: Text("IS1106(T)")),
                   DropdownMenuItem(value: "is1107", child: Text("IS1107")),
                   DropdownMenuItem(value: "is1108", child: Text("IS1108")),
                   DropdownMenuItem(value: "is1109", child: Text("IS1109")),

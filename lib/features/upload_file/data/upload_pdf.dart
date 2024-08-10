@@ -67,6 +67,7 @@ class UploadFile {
               msg.toastMsg(context, "File Uploaded !", pdfFile.names.single!,
                   ToastificationType.success);
               String url = await refToFile.getDownloadURL();
+              // ignore: unnecessary_null_comparison
               if (url == null) {
                 print("url not found");
                 return;
