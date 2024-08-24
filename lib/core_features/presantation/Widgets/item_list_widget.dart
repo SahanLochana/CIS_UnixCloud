@@ -3,6 +3,7 @@ import 'package:CIS_UnixCloud/core_features/Data/Remote/firebase_services.dart';
 import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Components/item_tile.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Components/loading_wave.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/records_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -41,10 +42,12 @@ class ItemListWidget extends StatelessWidget {
                   DocDataModal eachDocDataModal = itemList[index];
                   return Padding(
                       padding: const EdgeInsets.only(bottom: 10.0),
-                      child: ItemTile(
-                        docDataModal: eachDocDataModal,
-                        moduleId: moduleId,
-                      ));
+                      child: category != "Records"
+                          ? ItemTile(
+                              docDataModal: eachDocDataModal,
+                              moduleId: moduleId,
+                            )
+                          : RecordTile(docDataModal: eachDocDataModal));
                 },
               );
             });

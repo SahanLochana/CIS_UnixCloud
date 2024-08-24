@@ -64,7 +64,9 @@ class _HomePageState extends State<HomePage> {
                 width: double.infinity,
                 child: const Padding(
                   padding: EdgeInsets.all(30.0),
-                  child: CategoryRowWidget(),
+                  child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: CategoryRowWidget()),
                 ),
               ),
               Padding(
