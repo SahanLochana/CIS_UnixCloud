@@ -26,17 +26,17 @@ class CategoryRowWidget extends StatelessWidget {
           width: 15,
         ),
         CatoTileRound(
-          assetsPath: "assets\\icons\\resource.png",
-          title: "Resouces",
-          type: "resouces",
+          assetsPath: "assets\\icons\\video.png",
+          title: "Records",
+          type: "Records",
         ),
         SizedBox(
           width: 15,
         ),
         CatoTileRound(
           assetsPath: "assets\\icons\\resource.png",
-          title: "Records",
-          type: "Records",
+          title: "Resouces",
+          type: "resouces",
         ),
         SizedBox(
           width: 15,

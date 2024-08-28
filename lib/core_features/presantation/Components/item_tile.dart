@@ -1,4 +1,6 @@
 import 'package:CIS_UnixCloud/Routes/route_constant.dart';
+import 'package:CIS_UnixCloud/core_features/Data/Local/get_device_info.dart';
+import 'package:CIS_UnixCloud/core_features/Data/Local/handle_permission.dart';
 import 'package:CIS_UnixCloud/core_features/Data/Models/doc_modal.dart';
 import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
 import 'package:CIS_UnixCloud/features/download_file/data/remote/file_download.dart';
@@ -32,6 +34,27 @@ class _ItemTileState extends State<ItemTile> {
     final cloudPath =
         "modules/semester 01/${widget.moduleId}/${stateProvider.selectedCategory}/${widget.docDataModal.fileName}"
             .toLowerCase();
+
+    void downloadFunc() async {
+      FileDownload download = FileDownload();
+      bool isExists =
+          await download.checkFileExists(widget.docDataModal.fileName);
+      ToastMassege msg = ToastMassege();
+      if (!isExists) {
+        print(cloudPath);
+        downloadProvider.updateProgress(
+            context, cloudPath, widget.docDataModal.fileName);
+        msg.toastMsg(
+          context,
+          "Downloading",
+          widget.docDataModal.fileName,
+          ToastificationType.info,
+        );
+      } else {
+        msg.toastMsg(context, "File Alredy exists",
+            widget.docDataModal.fileName, ToastificationType.info);
+      }
+    }
 
     double deviceWidth = MediaQuery.sizeOf(context).width;
     return GestureDetector(
@@ -80,27 +103,13 @@ class _ItemTileState extends State<ItemTile> {
                         icon: const Icon(Icons.close))
                     : IconButton(
                         onPressed: () async {
-                          FileDownload download = FileDownload();
-                          bool isExists = await download
-                              .checkFileExists(widget.docDataModal.fileName);
-                          ToastMassege msg = ToastMassege();
-                          if (!isExists) {
-                            print(cloudPath);
-                            downloadProvider.updateProgress(context, cloudPath,
-                                widget.docDataModal.fileName);
-                            msg.toastMsg(
-                              context,
-                              "Downloading",
-                              widget.docDataModal.fileName,
-                              ToastificationType.info,
-                            );
-                          } else {
-                            msg.toastMsg(
-                                context,
-                                "File Alredy exists",
-                                widget.docDataModal.fileName,
-                                ToastificationType.info);
+                          int sdkVer = await GetInfo().getAndroidVersion();
+                          if (sdkVer <= 28) {
+                            await PermissionHandle()
+                                .handlePermission(context, downloadFunc);
+                            return;
                           }
+                          downloadFunc();
                         },
                         icon: Center(
                           child: Image.asset(

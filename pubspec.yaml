@@ -40,6 +40,8 @@ dependencies:
 
   url_launcher: ^6.3.0
 
+  device_info_plus: ^9.1.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,6 +70,7 @@ flutter:
     - assets\splash\splashLogo768.png
     - assets\splash\splashLogobg.png
     - assets\splash\splashLogo640.png
+    - assets\icons\video.png
 
   fonts:
     - family: dmsans
