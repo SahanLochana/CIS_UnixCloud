@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
     int state = await authService
         .signIn(emailController.text, passwordController.text)
         .timeout(
-      Duration(seconds: 5),
+      const Duration(seconds: 5),
       onTimeout: () {
         setState(() {
           isTrying = false;

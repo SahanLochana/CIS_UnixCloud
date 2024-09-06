@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:CIS_UnixCloud/features/toast_massege/toast_massege.dart';
@@ -27,11 +29,11 @@ class FileDownload {
   ) async {
     ToastMassege msg = ToastMassege();
     // path to download folder
-    final Directory? downloadDir =
+    final Directory downloadDir =
         Directory("/storage/emulated/0/Download/Uni materials");
 
     // full path
-    final filePath = "${downloadDir!.path}/$fileName";
+    final filePath = "${downloadDir.path}/$fileName";
 
     // File
     File saveFile = File(filePath);
@@ -39,7 +41,6 @@ class FileDownload {
       ToastMassege msg = ToastMassege();
       msg.toastMsg(
           context, "File Alredy exists", fileName, ToastificationType.info);
-      print("already exist");
       return;
     }
 
@@ -67,30 +68,25 @@ class FileDownload {
             break;
 
           case TaskState.paused:
-            print("poused");
             onChangeStateCode(-1);
             break;
 
           case TaskState.canceled:
-            print("canceled");
             onChangeStateCode(2);
             break;
 
           case TaskState.error:
             onChangeStateCode(3);
-            print("error");
             break;
           case TaskState.success:
-            print("success");
             msg.toastMsg(context, "Sucsessfuly Downloaded", fileName,
                 ToastificationType.success);
             onChangeStateCode(5);
-            print(saveFile.path);
             break;
         }
       });
     } on FirebaseException catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
   }
 }

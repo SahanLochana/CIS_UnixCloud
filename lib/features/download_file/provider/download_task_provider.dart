@@ -6,9 +6,9 @@ class DownloadTaskProvider extends ChangeNotifier {
   // instance of FileDownload
   FileDownload fileDownload = FileDownload();
   // progress veriable
-  Map<String, double> _downloadTasks = {};
-  Map<String, int> _downloadTaskFlags = {};
-  Map<String, DownloadTask> _downloadTask = {};
+  final Map<String, double> _downloadTasks = {};
+  final Map<String, int> _downloadTaskFlags = {};
+  final Map<String, DownloadTask> _downloadTask = {};
 
   Map<String, double> get downloadTasks => _downloadTasks;
   Map<String, int> get downloadTasksFlags => _downloadTaskFlags;
@@ -29,7 +29,6 @@ class DownloadTaskProvider extends ChangeNotifier {
         notifyListeners();
       },
       (stateCode) {
-        print(stateCode.toString());
         _downloadTaskFlags[fileName] = stateCode;
         notifyListeners();
         if (_downloadTaskFlags[fileName] == 5) {

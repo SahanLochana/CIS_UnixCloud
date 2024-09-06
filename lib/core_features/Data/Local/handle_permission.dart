@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:CIS_UnixCloud/features/toast_massege/toast_massege.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -18,7 +20,6 @@ class PermissionHandle {
         await downloadFunc();
       } else {
         // Permission denied, do nothing or handle it
-        print("Permission denied");
         ToastMassege().toastMsg(
             context,
             "Permission Denied",

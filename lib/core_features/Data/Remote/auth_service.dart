@@ -15,7 +15,6 @@ class AuthService {
       );
       return 1;
     } on FirebaseAuthException catch (e) {
-      print(e.code);
       switch (e.code) {
         case "invalid-credential":
           return 2;
@@ -25,7 +24,6 @@ class AuthService {
           return 4;
       }
     } catch (e) {
-      print(e.toString());
       return 6;
     }
   }

@@ -55,11 +55,16 @@ class MyRouteConfig {
       // pdf view page
       // pass pdf url
       GoRoute(
-        path: "/view/:url",
+        path: "/view/:url/:fileName",
         name: RouterConstants.pdfViewRouteName,
         pageBuilder: (context, state) {
           final url = state.pathParameters["url"];
-          return MaterialPage(child: PdfViewPage(url: url!));
+          final fileName = state.pathParameters["fileName"];
+          return MaterialPage(
+              child: PdfViewPage(
+            url: url!,
+            fileName: fileName!,
+          ));
         },
       ),
 

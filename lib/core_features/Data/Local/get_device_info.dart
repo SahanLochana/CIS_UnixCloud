@@ -4,7 +4,7 @@ class GetInfo {
   Future<int> getAndroidVersion() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    int sdkVer = await androidInfo.version.sdkInt;
+    int sdkVer = androidInfo.version.sdkInt;
     return sdkVer;
   }
 }

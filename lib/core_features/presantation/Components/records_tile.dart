@@ -15,7 +15,7 @@ class RecordTile extends StatelessWidget {
         try {
           openTelegram.openTelegram(docDataModal.url);
         } catch (e) {
-          print(e.toString());
+          debugPrint(e.toString());
         }
       },
       child: Container(
@@ -33,7 +33,7 @@ class RecordTile extends StatelessWidget {
               height: 25,
               width: 25,
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             SizedBox(
@@ -41,10 +41,10 @@ class RecordTile extends StatelessWidget {
               child: Text(
                 docDataModal.fileName,
                 softWrap: true,
-                style: TextStyle(fontFamily: "dmsans"),
+                style: const TextStyle(fontFamily: "dmsans"),
               ),
             ),
-            Icon(Icons.telegram_rounded)
+            const Icon(Icons.telegram_rounded)
           ],
         ),
       ),

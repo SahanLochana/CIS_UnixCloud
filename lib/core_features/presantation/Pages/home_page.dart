@@ -1,4 +1,3 @@
-import 'package:CIS_UnixCloud/core_features/Data/Local/get_device_info.dart';
 import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Widgets/category_row_widget.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Widgets/my_drawer.dart';
@@ -48,9 +47,7 @@ class _HomePageState extends State<HomePage> {
             ),
             actions: [
               IconButton(
-                onPressed: () {
-                  GetInfo().getAndroidVersion();
-                },
+                onPressed: () {},
                 icon: const Icon(Icons.notifications),
               )
             ],
@@ -60,16 +57,14 @@ class _HomePageState extends State<HomePage> {
             children: [
               // Catogory tile holdiing container
               Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xFF3D5A80),
-                    borderRadius: const BorderRadius.vertical(
-                        bottom: Radius.circular(20))),
+                decoration: const BoxDecoration(
+                    color: Color(0xFF3D5A80),
+                    borderRadius:
+                        BorderRadius.vertical(bottom: Radius.circular(20))),
                 width: double.infinity,
                 child: const Padding(
                   padding: EdgeInsets.all(30.0),
-                  child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: CategoryRowWidget()),
+                  child: Center(child: CategoryRowWidget()),
                 ),
               ),
               Padding(

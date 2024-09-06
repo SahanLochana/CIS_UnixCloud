@@ -1,12 +1,12 @@
 import 'package:CIS_UnixCloud/core_features/presantation/Components/loading_wave.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Components/pdf_page_nav_btn.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_file/internet_file.dart';
 import 'package:pdfx/pdfx.dart';
 
 class PdfViewPage extends StatefulWidget {
   final String url;
-  const PdfViewPage({super.key, required this.url});
+  final String fileName;
+  const PdfViewPage({super.key, required this.url, required this.fileName});
 
   @override
   State<PdfViewPage> createState() => _PdfViewPageState();
@@ -24,16 +24,20 @@ class _PdfViewPageState extends State<PdfViewPage> {
   @override
   void initState() {
     super.initState();
+
     // TODO : find way to handle error
-    pdfControllerPinch = PdfControllerPinch(
-        document: PdfDocument.openData(InternetFile.get(widget.url)));
+
+    pdfControllerPinch =
+        PdfControllerPinch(document: PdfDocument.openFile(widget.url));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(widget.fileName),
+      ),
       floatingActionButton: Container(
         height: 40,
         width: 160,

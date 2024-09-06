@@ -31,19 +31,21 @@ class UploadFile {
 
       // storage path to save
       Reference refToFile = storageRef.child(
-          "modules/semester 01/${moduleId}/$category/${pdfFile.names.single!}"
+          "modules/semester 01/$moduleId/$category/${pdfFile.names.single!}"
               .toLowerCase());
 
       try {
         await refToFile.getMetadata();
         return;
-      } catch (e) {}
+      } catch (e) {
+        debugPrint(e.toString());
+      }
 
       // upload
       final uploadTask = refToFile.putFile(file);
 
       // listen to task state
-      await uploadTask.snapshotEvents.listen(
+      uploadTask.snapshotEvents.listen(
         cancelOnError: true,
         (TaskSnapshot tasksnapshot) async {
           WriteOnDB writeOnDB = WriteOnDB();
@@ -54,22 +56,18 @@ class UploadFile {
               onProgress(progress);
               break;
             case TaskState.canceled:
-              print("Canceled");
               onProgress(0.0);
               break;
 
             case TaskState.paused:
-              print("Poused");
               break;
 
             case TaskState.success:
-              print("success");
               msg.toastMsg(context, "File Uploaded !", pdfFile.names.single!,
                   ToastificationType.success);
               String url = await refToFile.getDownloadURL();
               // ignore: unnecessary_null_comparison
               if (url == null) {
-                print("url not found");
                 return;
               }
               await writeOnDB.writeOnDB(
@@ -78,11 +76,9 @@ class UploadFile {
               onProgress(0.0);
               break;
             case TaskState.error:
-              print("error");
               onProgress(0.0);
               break;
             default:
-              print("some error");
               break;
           }
         },
@@ -90,10 +86,10 @@ class UploadFile {
 
       // get download url
     } on FirebaseException catch (e) {
+      debugPrint(e.toString());
       // handle error
-      print("error - ${e.toString()}");
     } catch (error) {
-      print(error.toString());
+      debugPrint(error.toString());
     }
   }
 }

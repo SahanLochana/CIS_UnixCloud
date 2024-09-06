@@ -14,7 +14,7 @@ class ModuleListWidget extends StatelessWidget {
     FirebaseServices services = FirebaseServices();
     return FutureBuilder(
         // Get data from database.
-        future: services.getModules("modules"),
+        future: services.getModules(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           // Show loading animation while data loading
           if (snapshot.connectionState == ConnectionState.waiting) {

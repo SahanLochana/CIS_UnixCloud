@@ -5,8 +5,8 @@ ThemeData myTheme = ThemeData(
     scaffoldBackgroundColor: Colors.grey.shade300,
     primaryColor: const Color(0xFFF78361),
     cardColor: Colors.grey.shade200,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       centerTitle: true,
-      backgroundColor: const Color(0xFF3D5A80),
+      backgroundColor: Color(0xFF3D5A80),
       iconTheme: IconThemeData(color: Colors.white),
     ));

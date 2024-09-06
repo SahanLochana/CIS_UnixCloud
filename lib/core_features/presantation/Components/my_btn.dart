@@ -13,7 +13,7 @@ class MyBtn extends StatelessWidget {
         overlayColor: MaterialStateProperty.resolveWith(
           (states) {
             return states.contains(MaterialState.pressed)
-                ? Color.fromARGB(255, 122, 152, 191)
+                ? const Color.fromARGB(255, 122, 152, 191)
                 : null;
           },
         ),
@@ -26,12 +26,12 @@ class MyBtn extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: isTrying
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Colors.white,
               )
-            : Text(
+            : const Text(
                 "SIGN IN",
                 style: TextStyle(
                   color: Colors.white,

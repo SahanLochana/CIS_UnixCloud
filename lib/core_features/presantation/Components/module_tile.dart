@@ -25,34 +25,36 @@ class ModuleTile extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: const BorderRadius.horizontal(
-                  left: Radius.circular(10),
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: const BorderRadius.horizontal(
+                    left: Radius.circular(10),
+                  ),
+                ),
+                width: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: SizedBox(
+                  width: MediaQuery.sizeOf(context).width - 100,
+                  child: Text(
+                    moduleModel.moduleName,
+                    style: TextStyle(
+                        color: Colors.grey.shade900,
+                        fontSize: 16,
+                        fontFamily: "dmsans"),
+                    overflow: TextOverflow.visible,
+                  ),
                 ),
               ),
-              width: 10,
-              height: 52,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: SizedBox(
-                width: MediaQuery.sizeOf(context).width - 100,
-                child: Text(
-                  moduleModel.moduleName,
-                  style: TextStyle(
-                      color: Colors.grey.shade900,
-                      fontSize: 16,
-                      fontFamily: "dmsans"),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

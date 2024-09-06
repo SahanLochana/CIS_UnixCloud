@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class WriteOnDB {
   String reoderCato(String category) {
@@ -20,8 +21,7 @@ class WriteOnDB {
     try {
       FirebaseFirestore db = FirebaseFirestore.instance;
 
-      String collectionPath =
-          "/modules/${moduleId.toUpperCase()}/${reodercato}";
+      String collectionPath = "/modules/${moduleId.toUpperCase()}/$reodercato";
 
       // ref to category collection
       CollectionReference categoryCollectionRef = db.collection(collectionPath);
@@ -32,7 +32,7 @@ class WriteOnDB {
       // save data
       await docRef.set(docData);
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
   }
 }

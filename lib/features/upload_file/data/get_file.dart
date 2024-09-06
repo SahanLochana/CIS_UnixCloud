@@ -8,7 +8,6 @@ class GetFile {
     if (result == null) {
       return null;
     }
-    print(result.names.single);
     return result;
   }
 }

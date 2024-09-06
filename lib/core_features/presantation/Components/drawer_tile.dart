@@ -29,7 +29,8 @@ class DrawerTile extends StatelessWidget {
         ),
         title: Text(
           tileTitle,
-          style: TextStyle(fontFamily: "dmsans", fontWeight: FontWeight.bold),
+          style: const TextStyle(
+              fontFamily: "dmsans", fontWeight: FontWeight.bold),
         ),
         trailing: const Icon(Icons.chevron_right_rounded),
       ),

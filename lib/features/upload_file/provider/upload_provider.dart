@@ -21,7 +21,6 @@ class UploadProvider extends ChangeNotifier {
       pdfFile,
       (progress) {
         _currentProgress = progress;
-        print(_currentProgress);
         notifyListeners();
       },
     );

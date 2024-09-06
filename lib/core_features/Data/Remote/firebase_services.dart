@@ -6,7 +6,7 @@ class FirebaseServices {
   var db = FirebaseFirestore.instance;
 
   // get modules
-  Future<List<ModuleModel>> getModules(String path) async {
+  Future<List<ModuleModel>> getModules() async {
     List<ModuleModel> modulesList = [];
     await db.collection("modules").get().then(
       (querySnapshot) {

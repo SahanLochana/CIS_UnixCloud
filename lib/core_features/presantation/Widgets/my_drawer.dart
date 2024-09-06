@@ -30,7 +30,7 @@ class MyDrawer extends StatelessWidget {
                       tileTitle: "N o t e s",
                       type: "Notes",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     const DrawerTile(
@@ -38,15 +38,15 @@ class MyDrawer extends StatelessWidget {
                       tileTitle: "S l i d e s",
                       type: "Slides",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     const DrawerTile(
-                      imagePath: "assets\\icons\\resource.png",
-                      tileTitle: "R e s o u c e s",
-                      type: "resouces",
+                      imagePath: "assets\\icons\\video.png",
+                      tileTitle: "R e c o r d s",
+                      type: "Records",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     // show this only user is a admin
@@ -62,7 +62,7 @@ class MyDrawer extends StatelessWidget {
                           height: 25,
                           width: 25,
                         ),
-                        title: Text(
+                        title: const Text(
                           'Admin Board',
                           style: TextStyle(
                               fontFamily: "dmsans",

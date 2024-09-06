@@ -1,8 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:CIS_UnixCloud/Routes/route_constant.dart';
 import 'package:CIS_UnixCloud/core_features/Data/Local/get_device_info.dart';
 import 'package:CIS_UnixCloud/core_features/Data/Local/handle_permission.dart';
 import 'package:CIS_UnixCloud/core_features/Data/Models/doc_modal.dart';
+import 'package:CIS_UnixCloud/core_features/Data/Remote/cache_func.dart';
 import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/loading_wave.dart';
 import 'package:CIS_UnixCloud/features/download_file/data/remote/file_download.dart';
 import 'package:CIS_UnixCloud/features/download_file/provider/download_task_provider.dart';
 import 'package:CIS_UnixCloud/features/toast_massege/toast_massege.dart';
@@ -28,7 +32,6 @@ class _ItemTileState extends State<ItemTile> {
     final downloadProvider = Provider.of<DownloadTaskProvider>(context);
     int? showBar =
         downloadProvider.downloadTasksFlags[widget.docDataModal.fileName];
-    print("showbar ${widget.docDataModal.fileName} $showBar");
 
     // cloud path
     final cloudPath =
@@ -41,7 +44,6 @@ class _ItemTileState extends State<ItemTile> {
           await download.checkFileExists(widget.docDataModal.fileName);
       ToastMassege msg = ToastMassege();
       if (!isExists) {
-        print(cloudPath);
         downloadProvider.updateProgress(
             context, cloudPath, widget.docDataModal.fileName);
         msg.toastMsg(
@@ -57,13 +59,43 @@ class _ItemTileState extends State<ItemTile> {
     }
 
     double deviceWidth = MediaQuery.sizeOf(context).width;
+    CachingPdf cachingPdf = CachingPdf();
     return GestureDetector(
-      onTap: () {
-        // navigate to pdf view page.
-        GoRouter.of(context).pushNamed(
-          RouterConstants.pdfViewRouteName,
-          pathParameters: {"url": widget.docDataModal.url},
+      onTap: () async {
+        String filename = widget.docDataModal.fileName;
+        showDialog(
+          context: context,
+          builder: (context) => const AlertDialog(
+            title: Text("Caching...."),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Center(child: LoadingWave()),
+              ],
+            ),
+          ),
         );
+
+        bool isAvailable = await cachingPdf.isAvailable(filename);
+        String? path = await cachingPdf.pdfPath(filename);
+
+        // Wait for the cachePdf function to complete
+        if (!isAvailable) {
+          path = await cachingPdf.cachePdf(context, filename, cloudPath);
+        }
+        // print(path);
+        context.pop();
+        // Check if the path is valid before navigating
+        if (path != null) {
+          // Navigate to the PDF view page
+          GoRouter.of(context).pushNamed(
+            RouterConstants.pdfViewRouteName,
+            pathParameters: {"url": path, "fileName": filename},
+          );
+        } else {
+          // Handle the error if the caching fails
+          // Optionally, you can show a dialog or snackbar to inform the user
+        }
       },
       child: Container(
         padding: const EdgeInsets.all(15),
@@ -82,7 +114,7 @@ class _ItemTileState extends State<ItemTile> {
                   height: 25,
                   width: 25,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 SizedBox(
@@ -90,7 +122,7 @@ class _ItemTileState extends State<ItemTile> {
                   child: Text(
                     widget.docDataModal.fileName,
                     softWrap: true,
-                    style: TextStyle(fontFamily: "dmsans"),
+                    style: const TextStyle(fontFamily: "dmsans"),
                   ),
                 ),
                 showBar == 1
