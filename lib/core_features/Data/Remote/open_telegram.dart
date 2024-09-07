@@ -2,7 +2,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class OpenTelegram {
   void openTelegram(String tgLink) async {
-    Uri uri = Uri.parse("https://t.me/c/2199673703/178");
+    Uri uri = Uri.parse(tgLink);
     if (!await launchUrl(
       uri,
       mode: LaunchMode.externalApplication,
