@@ -1,12 +1,16 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:CIS_UnixCloud/Routes/route_constant.dart';
 import 'package:CIS_UnixCloud/core_features/Data/Local/get_device_info.dart';
 import 'package:CIS_UnixCloud/core_features/Data/Local/handle_permission.dart';
 import 'package:CIS_UnixCloud/core_features/Data/Models/doc_modal.dart';
 import 'package:CIS_UnixCloud/core_features/Data/Remote/cache_func.dart';
+import 'package:CIS_UnixCloud/core_features/Provider/cache_provider.dart';
 import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Components/loading_wave.dart';
+import 'package:CIS_UnixCloud/features/app_settings/local/store_data.dart';
 import 'package:CIS_UnixCloud/features/download_file/data/remote/file_download.dart';
 import 'package:CIS_UnixCloud/features/download_file/provider/download_task_provider.dart';
 import 'package:CIS_UnixCloud/features/toast_massege/toast_massege.dart';
@@ -30,6 +34,7 @@ class _ItemTileState extends State<ItemTile> {
   Widget build(BuildContext context) {
     final stateProvider = Provider.of<StatusProvider>(context);
     final downloadProvider = Provider.of<DownloadTaskProvider>(context);
+    final cacheProvider = Provider.of<CacheProvider>(context);
     int? showBar =
         downloadProvider.downloadTasksFlags[widget.docDataModal.fileName];
 
@@ -59,6 +64,7 @@ class _ItemTileState extends State<ItemTile> {
     }
 
     double deviceWidth = MediaQuery.sizeOf(context).width;
+    final StoreData prefData = StoreData();
     CachingPdf cachingPdf = CachingPdf();
     return GestureDetector(
       onTap: () async {
@@ -78,23 +84,35 @@ class _ItemTileState extends State<ItemTile> {
 
         bool isAvailable = await cachingPdf.isAvailable(filename);
         String? path = await cachingPdf.pdfPath(filename);
+        int fileSize = await File(path).length();
 
         // Wait for the cachePdf function to complete
-        if (!isAvailable) {
+        if (!isAvailable && cacheProvider.isEnabled) {
           path = await cachingPdf.cachePdf(context, filename, cloudPath);
         }
         // print(path);
         context.pop();
+        print(fileSize.toString());
         // Check if the path is valid before navigating
-        if (path != null) {
+        if (path != null && fileSize > 500) {
           // Navigate to the PDF view page
           GoRouter.of(context).pushNamed(
             RouterConstants.pdfViewRouteName,
-            pathParameters: {"url": path, "fileName": filename},
+            pathParameters: {
+              "url": path,
+              "fileName": filename,
+              "onDevice": "true",
+            },
           );
         } else {
-          // Handle the error if the caching fails
-          // Optionally, you can show a dialog or snackbar to inform the user
+          GoRouter.of(context).pushNamed(
+            RouterConstants.pdfViewRouteName,
+            pathParameters: {
+              "url": widget.docDataModal.url,
+              "fileName": filename,
+              "onDevice": "false",
+            },
+          );
         }
       },
       child: Container(

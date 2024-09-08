@@ -1,12 +1,18 @@
 import 'package:CIS_UnixCloud/core_features/presantation/Components/loading_wave.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Components/pdf_page_nav_btn.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_file/internet_file.dart';
 import 'package:pdfx/pdfx.dart';
 
 class PdfViewPage extends StatefulWidget {
   final String url;
   final String fileName;
-  const PdfViewPage({super.key, required this.url, required this.fileName});
+  final String onDevice;
+  const PdfViewPage(
+      {super.key,
+      required this.url,
+      required this.fileName,
+      required this.onDevice});
 
   @override
   State<PdfViewPage> createState() => _PdfViewPageState();
@@ -24,11 +30,16 @@ class _PdfViewPageState extends State<PdfViewPage> {
   @override
   void initState() {
     super.initState();
-
-    // TODO : find way to handle error
-
-    pdfControllerPinch =
-        PdfControllerPinch(document: PdfDocument.openFile(widget.url));
+    print(widget.onDevice);
+    if (widget.onDevice == "true") {
+      pdfControllerPinch =
+          PdfControllerPinch(document: PdfDocument.openFile(widget.url));
+      print("--------onDevice-----------");
+    } else {
+      pdfControllerPinch = PdfControllerPinch(
+          document: PdfDocument.openData(InternetFile.get(widget.url)));
+      print("--------url------------");
+    }
   }
 
   @override

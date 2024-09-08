@@ -1,3 +1,4 @@
+import 'package:CIS_UnixCloud/core_features/Data/Remote/cache_func.dart';
 import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Widgets/category_row_widget.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Widgets/my_drawer.dart';
@@ -47,7 +48,9 @@ class _HomePageState extends State<HomePage> {
             ),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () async {
+                  CachingPdf().getFolderSize();
+                },
                 icon: const Icon(Icons.notifications),
               )
             ],

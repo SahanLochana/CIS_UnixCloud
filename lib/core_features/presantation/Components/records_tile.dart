@@ -1,6 +1,8 @@
 import 'package:CIS_UnixCloud/core_features/Data/Models/doc_modal.dart';
 import 'package:CIS_UnixCloud/core_features/Data/Remote/open_telegram.dart';
+import 'package:CIS_UnixCloud/features/toast_massege/toast_massege.dart';
 import 'package:flutter/material.dart';
+import 'package:toastification/toastification.dart';
 
 class RecordTile extends StatelessWidget {
   final DocDataModal docDataModal;
@@ -16,6 +18,8 @@ class RecordTile extends StatelessWidget {
           openTelegram.openTelegram(docDataModal.url);
         } catch (e) {
           debugPrint(e.toString());
+          ToastMassege().toastMsg(context, "Link can't open",
+              "Can't open the link !", ToastificationType.error);
         }
       },
       child: Container(

@@ -5,6 +5,7 @@ import 'package:CIS_UnixCloud/core_features/presantation/Pages/home_page.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Pages/item_page.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Pages/modules_page.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Pages/pdf_view_page.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -55,15 +56,17 @@ class MyRouteConfig {
       // pdf view page
       // pass pdf url
       GoRoute(
-        path: "/view/:url/:fileName",
+        path: "/view/:url/:fileName/:onDevice",
         name: RouterConstants.pdfViewRouteName,
         pageBuilder: (context, state) {
           final url = state.pathParameters["url"];
           final fileName = state.pathParameters["fileName"];
+          final onDevice = state.pathParameters["onDevice"];
           return MaterialPage(
               child: PdfViewPage(
             url: url!,
             fileName: fileName!,
+            onDevice: onDevice!,
           ));
         },
       ),
@@ -76,6 +79,13 @@ class MyRouteConfig {
         pageBuilder: (context, state) {
           final uid = state.pathParameters["uid"];
           return MaterialPage(child: AdminBoard(uid: uid!));
+        },
+      ),
+      GoRoute(
+        path: "/settings",
+        name: RouterConstants.settingPageRouteName,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: SettingPage());
         },
       ),
     ],

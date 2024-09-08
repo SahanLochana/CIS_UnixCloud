@@ -11,4 +11,6 @@ class RouterConstants {
   static const String pdfViewRouteName = "pdfView";
   // admin page
   static const String adminBoardRouteName = "adminBoard";
+  // setting page
+  static const String settingPageRouteName = "settingPage";
 }

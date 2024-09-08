@@ -1,6 +1,8 @@
 import 'package:CIS_UnixCloud/Routes/routes_config.dart';
+import 'package:CIS_UnixCloud/core_features/Provider/cache_provider.dart';
 import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/theme/theme_data.dart';
+import 'package:CIS_UnixCloud/features/app_settings/local/store_data.dart';
 import 'package:CIS_UnixCloud/features/download_file/provider/download_task_provider.dart';
 import 'package:CIS_UnixCloud/features/upload_file/provider/upload_provider.dart';
 import 'package:CIS_UnixCloud/firebase_options.dart';
@@ -15,6 +17,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  StoreData storeData = StoreData();
+  if (await storeData.getCacheStatus() == null) {
+    storeData.storeCacheStatus(true);
+  }
+
   runApp(const MyApp());
 }
 
@@ -39,6 +46,9 @@ class _MyAppState extends State<MyApp> {
           ),
           ChangeNotifierProvider<UploadProvider>(
             create: (context) => UploadProvider(),
+          ),
+          ChangeNotifierProvider<CacheProvider>(
+            create: (context) => CacheProvider(),
           ),
         ],
         child: MaterialApp.router(

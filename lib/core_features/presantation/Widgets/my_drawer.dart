@@ -1,6 +1,7 @@
 import 'package:CIS_UnixCloud/Routes/route_constant.dart';
 import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Components/drawer_tile.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/setting_tile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -70,6 +71,13 @@ class MyDrawer extends StatelessWidget {
                         ),
                         trailing: const Icon(Icons.chevron_right_rounded),
                       ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const SettingTile(
+                      imagePath: "assets\\icons\\video.png",
+                      tileTitle: "S e t t i n g s",
+                    ),
                   ],
                 ),
                 Column(
