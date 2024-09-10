@@ -25,9 +25,9 @@ class AdminPageTile extends StatelessWidget {
         );
       },
       style: ButtonStyle(
-        elevation: const MaterialStatePropertyAll(0),
-        backgroundColor: const MaterialStatePropertyAll(Colors.white),
-        shape: MaterialStatePropertyAll(
+        elevation: const WidgetStatePropertyAll(0),
+        backgroundColor: const WidgetStatePropertyAll(Colors.white),
+        shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),

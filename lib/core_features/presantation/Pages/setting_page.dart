@@ -1,6 +1,4 @@
-import 'package:CIS_UnixCloud/core_features/Data/Remote/cache_func.dart';
 import 'package:CIS_UnixCloud/core_features/Provider/cache_provider.dart';
-import 'package:CIS_UnixCloud/features/app_settings/local/store_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -66,8 +64,8 @@ class _SettingPageState extends State<SettingPage> {
                   value.getFileSize();
                 },
                 style: ButtonStyle(
-                  elevation: const MaterialStatePropertyAll(0),
-                  shape: MaterialStatePropertyAll(
+                  elevation: const WidgetStatePropertyAll(0),
+                  shape: WidgetStatePropertyAll(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),

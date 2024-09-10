@@ -1,4 +1,3 @@
-import 'package:CIS_UnixCloud/core_features/Data/Remote/cache_func.dart';
 import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Widgets/category_row_widget.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Widgets/my_drawer.dart';
@@ -46,14 +45,6 @@ class _HomePageState extends State<HomePage> {
               currentUser!.uid.toString(),
               style: const TextStyle(color: Colors.white, fontFamily: "dmsans"),
             ),
-            actions: [
-              IconButton(
-                onPressed: () async {
-                  CachingPdf().getFolderSize();
-                },
-                icon: const Icon(Icons.notifications),
-              )
-            ],
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,28 +52,29 @@ class _HomePageState extends State<HomePage> {
               // Catogory tile holdiing container
               Container(
                 decoration: const BoxDecoration(
-                    color: Color(0xFF3D5A80),
-                    borderRadius:
-                        BorderRadius.vertical(bottom: Radius.circular(20))),
+                  color: Color(0xFF3D5A80),
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(20),
+                  ),
+                ),
                 width: double.infinity,
                 child: const Padding(
                   padding: EdgeInsets.all(30.0),
                   child: Center(child: CategoryRowWidget()),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Text(
-                  // TODO : wrap with column and create feture for show annoucements
-                  "Annoucement",
-                  style: TextStyle(
-                    fontFamily: "dmsans",
-                    color: Colors.grey.shade900,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(25.0),
+              //   child: Text(
+              //     "Annoucement",
+              //     style: TextStyle(
+              //       fontFamily: "dmsans",
+              //       color: Colors.grey.shade900,
+              //       fontSize: 20,
+              //       fontWeight: FontWeight.bold,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         );

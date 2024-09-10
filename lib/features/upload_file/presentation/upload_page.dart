@@ -1,5 +1,7 @@
 import 'package:CIS_UnixCloud/features/toast_massege/toast_massege.dart';
 import 'package:CIS_UnixCloud/features/upload_file/data/get_file.dart';
+import 'package:CIS_UnixCloud/features/upload_file/data/write_on_db.dart';
+import 'package:CIS_UnixCloud/features/upload_file/presentation/components/link_paste.dart';
 import 'package:CIS_UnixCloud/features/upload_file/presentation/components/popup_btn.dart';
 import 'package:CIS_UnixCloud/features/upload_file/provider/upload_provider.dart';
 import 'package:file_picker/file_picker.dart';
@@ -21,10 +23,33 @@ class PopUpWindow extends StatefulWidget {
 }
 
 class _PopUpWindowState extends State<PopUpWindow> {
+  TextEditingController linkController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+
+  ToastMassege msg = ToastMassege();
+
+  WriteOnDB writeOnDB = WriteOnDB();
+
   String selectedModuleId = "is1101";
   String selectedCategory = "notes";
   String? filename;
   FilePickerResult? pickedFile;
+
+  void writeToDB() async {
+    msg.toastMsg(context, "Link uploading Started",
+        "${nameController.text} uploading started", ToastificationType.info);
+    await writeOnDB.writeOnDB(
+        selectedModuleId,
+        selectedCategory,
+        "${selectedModuleId.toUpperCase()} ${nameController.text} Record",
+        linkController.text);
+    msg.toastMsg(
+        // ignore: use_build_context_synchronously
+        context,
+        "Link uploading Finished",
+        "${nameController.text} uploading Finished",
+        ToastificationType.success);
+  }
 
   final TextStyle _style = const TextStyle(
     fontFamily: "dmsans",
@@ -127,9 +152,9 @@ class _PopUpWindowState extends State<PopUpWindow> {
                       },
                       style: ButtonStyle(
                         backgroundColor:
-                            const MaterialStatePropertyAll(Color(0xFF3D5A80)),
-                        elevation: const MaterialStatePropertyAll(0),
-                        shape: MaterialStatePropertyAll(
+                            const WidgetStatePropertyAll(Color(0xFF3D5A80)),
+                        elevation: const WidgetStatePropertyAll(0),
+                        shape: WidgetStatePropertyAll(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -141,7 +166,21 @@ class _PopUpWindowState extends State<PopUpWindow> {
                             color: Colors.white,
                           )),
                     )
-                  : const Text("records"), // TODO : add line to paste link
+                  : Column(
+                      children: [
+                        LinkPastefield(
+                          hintText: "telegram link",
+                          controller: linkController,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        LinkPastefield(
+                          hintText: "Date and time (optional : part)",
+                          controller: nameController,
+                        ),
+                      ],
+                    ), // TODO : add line to paste link
               const SizedBox(
                 height: 20,
               ),
@@ -157,34 +196,39 @@ class _PopUpWindowState extends State<PopUpWindow> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   PopUpActionBtn(
-                    btnTitle: "Upload",
-                    onPressed: value.progress > 0
-                        ? () {}
-                        : () {
-                            ToastMassege msg = ToastMassege();
-                            try {
-                              msg.toastMsg(context, "File Uploading", filename!,
-                                  ToastificationType.info);
-                              value.progressListener(context, selectedModuleId,
-                                  selectedCategory, pickedFile!);
-                            } catch (e) {
-                              if (e.toString() ==
-                                  "Null check operator used on a null value") {
-                                msg.toastMsg(
-                                    context,
-                                    "File not selected",
-                                    "Please select a file",
-                                    ToastificationType.error);
-                              } else {
-                                msg.toastMsg(
-                                    context,
-                                    "Error",
-                                    "Somthing went wrong !",
-                                    ToastificationType.error);
-                              }
-                            }
-                          },
-                  ),
+                      btnTitle: "Upload",
+                      onPressed: value.progress > 0
+                          ? () {}
+                          : selectedCategory != "records"
+                              ? () {
+                                  try {
+                                    msg.toastMsg(context, "File Uploading",
+                                        filename!, ToastificationType.info);
+                                    value.progressListener(
+                                        context,
+                                        selectedModuleId,
+                                        selectedCategory,
+                                        pickedFile!);
+                                  } catch (e) {
+                                    if (e.toString() ==
+                                        "Null check operator used on a null value") {
+                                      msg.toastMsg(
+                                          context,
+                                          "File not selected",
+                                          "Please select a file",
+                                          ToastificationType.error);
+                                    } else {
+                                      msg.toastMsg(
+                                          context,
+                                          "Error",
+                                          "Somthing went wrong !",
+                                          ToastificationType.error);
+                                    }
+                                  }
+                                }
+                              : () {
+                                  writeToDB();
+                                }),
                   const SizedBox(
                     width: 20,
                   ),

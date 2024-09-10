@@ -10,7 +10,6 @@ import 'package:CIS_UnixCloud/core_features/Data/Remote/cache_func.dart';
 import 'package:CIS_UnixCloud/core_features/Provider/cache_provider.dart';
 import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Components/loading_wave.dart';
-import 'package:CIS_UnixCloud/features/app_settings/local/store_data.dart';
 import 'package:CIS_UnixCloud/features/download_file/data/remote/file_download.dart';
 import 'package:CIS_UnixCloud/features/download_file/provider/download_task_provider.dart';
 import 'package:CIS_UnixCloud/features/toast_massege/toast_massege.dart';
@@ -64,7 +63,6 @@ class _ItemTileState extends State<ItemTile> {
     }
 
     double deviceWidth = MediaQuery.sizeOf(context).width;
-    final StoreData prefData = StoreData();
     CachingPdf cachingPdf = CachingPdf();
     return GestureDetector(
       onTap: () async {
@@ -84,36 +82,46 @@ class _ItemTileState extends State<ItemTile> {
 
         bool isAvailable = await cachingPdf.isAvailable(filename);
         String? path = await cachingPdf.pdfPath(filename);
-        int fileSize = await File(path).length();
+        try {
+          int fileSize = await File(path).length();
+          if (path != null && fileSize > 500) {
+            GoRouter.of(context).pushNamed(
+              RouterConstants.pdfViewRouteName,
+              pathParameters: {
+                "url": path,
+                "fileName": filename,
+                "onDevice": "true",
+              },
+            );
+          } else {
+            debugPrint("_________");
+          }
+        } catch (e) {
+          if (!isAvailable && cacheProvider.isEnabled) {
+            path = await cachingPdf.cachePdf(context, filename, cloudPath);
+            GoRouter.of(context).pushNamed(
+              RouterConstants.pdfViewRouteName,
+              pathParameters: {
+                "url": path!,
+                "fileName": filename,
+                "onDevice": "true",
+              },
+            );
+          } else {
+            GoRouter.of(context).pushNamed(
+              RouterConstants.pdfViewRouteName,
+              pathParameters: {
+                "url": widget.docDataModal.url,
+                "fileName": filename,
+                "onDevice": "false",
+              },
+            );
+          }
+        }
 
-        // Wait for the cachePdf function to complete
-        if (!isAvailable && cacheProvider.isEnabled) {
-          path = await cachingPdf.cachePdf(context, filename, cloudPath);
-        }
-        // print(path);
         context.pop();
-        print(fileSize.toString());
-        // Check if the path is valid before navigating
-        if (path != null && fileSize > 500) {
-          // Navigate to the PDF view page
-          GoRouter.of(context).pushNamed(
-            RouterConstants.pdfViewRouteName,
-            pathParameters: {
-              "url": path,
-              "fileName": filename,
-              "onDevice": "true",
-            },
-          );
-        } else {
-          GoRouter.of(context).pushNamed(
-            RouterConstants.pdfViewRouteName,
-            pathParameters: {
-              "url": widget.docDataModal.url,
-              "fileName": filename,
-              "onDevice": "false",
-            },
-          );
-        }
+
+        // Navigate to the PDF view page
       },
       child: Container(
         padding: const EdgeInsets.all(15),

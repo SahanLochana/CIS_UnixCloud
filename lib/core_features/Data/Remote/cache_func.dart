@@ -58,11 +58,10 @@ class CachingPdf extends ToastMassege {
             sizeInByte += await entity.length();
           }
         }
-        var sizeInMB = (sizeInByte / (1024 * 1024)).toStringAsFixed(2);
-        print("${sizeInMB}MB");
+        (sizeInByte / (1024 * 1024)).toStringAsFixed(2);
       }
     } catch (e) {
-      print("Error while calculating folder size: $e");
+      debugPrint(e.toString());
     }
 
     return sizeInByte;
@@ -79,12 +78,9 @@ class CachingPdf extends ToastMassege {
       if (await dir.exists()) {
         // Delete the directory and all its contents
         await dir.delete(recursive: true);
-        print('Cache folder deleted successfully.');
-      } else {
-        print('Cache folder does not exist.');
-      }
+      } else {}
     } catch (e) {
-      print('Error while deleting cache folder: $e');
+      debugPrint(e.toString());
     }
   }
 }

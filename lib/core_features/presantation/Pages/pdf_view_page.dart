@@ -30,15 +30,12 @@ class _PdfViewPageState extends State<PdfViewPage> {
   @override
   void initState() {
     super.initState();
-    print(widget.onDevice);
     if (widget.onDevice == "true") {
       pdfControllerPinch =
           PdfControllerPinch(document: PdfDocument.openFile(widget.url));
-      print("--------onDevice-----------");
     } else {
       pdfControllerPinch = PdfControllerPinch(
           document: PdfDocument.openData(InternetFile.get(widget.url)));
-      print("--------url------------");
     }
   }
 
@@ -47,7 +44,11 @@ class _PdfViewPageState extends State<PdfViewPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: Text(widget.fileName),
+        title: Text(
+          widget.fileName,
+          style: const TextStyle(
+              fontFamily: "dmsans", color: Colors.white, fontSize: 14),
+        ),
       ),
       floatingActionButton: Container(
         height: 40,

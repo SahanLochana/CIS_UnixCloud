@@ -13,7 +13,10 @@ class ItemsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           "Files",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+            fontFamily: "dmsans",
+            color: Colors.white,
+          ),
         ),
       ),
       body: Padding(

@@ -63,6 +63,7 @@ class UploadFile {
               break;
 
             case TaskState.success:
+              // ignore: use_build_context_synchronously
               msg.toastMsg(context, "File Uploaded !", pdfFile.names.single!,
                   ToastificationType.success);
               String url = await refToFile.getDownloadURL();

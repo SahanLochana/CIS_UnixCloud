@@ -10,16 +10,16 @@ class MyBtn extends StatelessWidget {
     return ElevatedButton(
       onPressed: isTrying ? () {} : onTap,
       style: ButtonStyle(
-        overlayColor: MaterialStateProperty.resolveWith(
+        overlayColor: WidgetStateProperty.resolveWith(
           (states) {
-            return states.contains(MaterialState.pressed)
+            return states.contains(WidgetState.pressed)
                 ? const Color.fromARGB(255, 122, 152, 191)
                 : null;
           },
         ),
-        elevation: const MaterialStatePropertyAll(0),
-        backgroundColor: const MaterialStatePropertyAll(Color(0xFF3D5A80)),
-        shape: MaterialStatePropertyAll(
+        elevation: const WidgetStatePropertyAll(0),
+        backgroundColor: const WidgetStatePropertyAll(Color(0xFF3D5A80)),
+        shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),

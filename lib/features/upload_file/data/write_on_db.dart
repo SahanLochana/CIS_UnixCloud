@@ -3,10 +3,15 @@ import 'package:flutter/material.dart';
 
 class WriteOnDB {
   String reoderCato(String category) {
-    if (category == "notes") {
-      return "Notes";
-    } else {
-      return "Slides";
+    switch (category) {
+      case "notes":
+        return "Notes";
+      case "Slides":
+        return "Slides";
+      case "records":
+        return "Records";
+      default:
+        return "error";
     }
   }
 

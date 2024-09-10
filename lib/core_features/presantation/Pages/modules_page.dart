@@ -13,7 +13,7 @@ class ModulePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           "Modules",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(fontFamily: "dmsans", color: Colors.white),
         ),
         centerTitle: true,
       ),
