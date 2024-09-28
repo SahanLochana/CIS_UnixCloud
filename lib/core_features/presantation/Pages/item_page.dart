@@ -1,7 +1,8 @@
+import 'package:CIS_UnixCloud/core_features/presantation/Widgets/item_list_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:student_manegment_app/core_features/presantation/Widgets/item_list_widget.dart';
 
 class ItemsPage extends StatelessWidget {
+  // get module id for get documents
   final String moduleId;
   const ItemsPage({super.key, required this.moduleId});
 
@@ -12,11 +13,11 @@ class ItemsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           "Files",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+            fontFamily: "dmsans",
+            color: Colors.white,
+          ),
         ),
-        centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.white),
-        backgroundColor: Colors.grey.shade900,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

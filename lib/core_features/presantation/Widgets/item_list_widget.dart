@@ -1,10 +1,11 @@
+import 'package:CIS_UnixCloud/core_features/Data/Models/doc_modal.dart';
+import 'package:CIS_UnixCloud/core_features/Data/Remote/firebase_services.dart';
+import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/item_tile.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/loading_wave.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/records_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:student_manegment_app/core_features/Data/Models/doc_modal.dart';
-import 'package:student_manegment_app/core_features/Data/Remote/firebase_services.dart';
-import 'package:student_manegment_app/core_features/Provider/current_status_provider.dart';
-import 'package:student_manegment_app/core_features/presantation/Components/item_tile.dart';
-import 'package:student_manegment_app/core_features/presantation/Components/loading_wave.dart';
 
 class ItemListWidget extends StatelessWidget {
   final String moduleId;
@@ -22,14 +23,18 @@ class ItemListWidget extends StatelessWidget {
         return FutureBuilder(
             future: services.getdocs(moduleId, category),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
+              // show loading animation while data load
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: LoadingWave());
+                // when got error
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
+                // if ther no data
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                 return const Center(child: Text('No data available'));
               }
 
+              // if has data
               List<DocDataModal> itemList = snapshot.data;
               return ListView.builder(
                 itemCount: itemList.length,
@@ -37,7 +42,12 @@ class ItemListWidget extends StatelessWidget {
                   DocDataModal eachDocDataModal = itemList[index];
                   return Padding(
                       padding: const EdgeInsets.only(bottom: 10.0),
-                      child: ItemTile(docDataModal: eachDocDataModal));
+                      child: category != "Records"
+                          ? ItemTile(
+                              docDataModal: eachDocDataModal,
+                              moduleId: moduleId,
+                            )
+                          : RecordTile(docDataModal: eachDocDataModal));
                 },
               );
             });

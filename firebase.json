@@ -1,1 +1,22 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"student-management-app-f9d09","appId":"1:323385771673:android:f9d2468a662a02f19d9a08","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"student-management-app-f9d09","configurations":{"android":"1:323385771673:android:f9d2468a662a02f19d9a08","ios":"1:323385771673:ios:9dd9299b81a5bcfa9d9a08"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "student-management-app-f9d09",
+          "appId": "1:323385771673:android:f9d2468a662a02f19d9a08",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "student-management-app-f9d09",
+          "configurations": {
+            "android": "1:323385771673:android:f9d2468a662a02f19d9a08",
+            "ios": "1:323385771673:ios:9dd9299b81a5bcfa9d9a08"
+          }
+        }
+      }
+    }
+  }
+}

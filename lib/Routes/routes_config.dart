@@ -1,16 +1,19 @@
+import 'package:CIS_UnixCloud/Routes/route_constant.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/admin_board.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/auth_page.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/home_page.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/item_page.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/modules_page.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/pdf_view_page.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:student_manegment_app/Routes/route_constant.dart';
-import 'package:student_manegment_app/core_features/presantation/Pages/admin_board.dart';
-import 'package:student_manegment_app/core_features/presantation/Pages/auth_page.dart';
-import 'package:student_manegment_app/core_features/presantation/Pages/home_page.dart';
-import 'package:student_manegment_app/core_features/presantation/Pages/item_page.dart';
-import 'package:student_manegment_app/core_features/presantation/Pages/modules_page.dart';
-import 'package:student_manegment_app/core_features/presantation/Pages/pdf_view_page.dart';
 
 class MyRouteConfig {
   GoRouter routers = GoRouter(
     routes: [
+      // auth page
+      // when app start show first page
       GoRoute(
         path: "/",
         name: RouterConstants.authRouteName,
@@ -18,6 +21,8 @@ class MyRouteConfig {
           return const MaterialPage(child: AuthPage());
         },
       ),
+
+      // home page
       GoRoute(
         path: "/home",
         name: RouterConstants.homeRouteName,
@@ -25,6 +30,8 @@ class MyRouteConfig {
           return const MaterialPage(child: HomePage());
         },
       ),
+
+      // module page
       GoRoute(
         path: "/modules",
         name: RouterConstants.modulesRouteName,
@@ -32,6 +39,9 @@ class MyRouteConfig {
           return const MaterialPage(child: ModulePage());
         },
       ),
+
+      // item page
+      // pass module id
       GoRoute(
         path: "/items/:moduleId",
         name: RouterConstants.itemsRouteName,
@@ -43,20 +53,39 @@ class MyRouteConfig {
           ));
         },
       ),
+      // pdf view page
+      // pass pdf url
       GoRoute(
-        path: "/view/:url",
+        path: "/view/:url/:fileName/:onDevice",
         name: RouterConstants.pdfViewRouteName,
         pageBuilder: (context, state) {
           final url = state.pathParameters["url"];
-          return MaterialPage(child: PdfViewPage(url: url!));
+          final fileName = state.pathParameters["fileName"];
+          final onDevice = state.pathParameters["onDevice"];
+          return MaterialPage(
+              child: PdfViewPage(
+            url: url!,
+            fileName: fileName!,
+            onDevice: onDevice!,
+          ));
         },
       ),
+
+      // admin page
+      // pass user id
       GoRoute(
         path: "/admin/:uid",
         name: RouterConstants.adminBoardRouteName,
         pageBuilder: (context, state) {
           final uid = state.pathParameters["uid"];
           return MaterialPage(child: AdminBoard(uid: uid!));
+        },
+      ),
+      GoRoute(
+        path: "/settings",
+        name: RouterConstants.settingPageRouteName,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: SettingPage());
         },
       ),
     ],

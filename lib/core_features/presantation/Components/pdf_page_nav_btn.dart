@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pdfx/pdfx.dart';
 
+// navigate through pdf pages
+
 class PdfPageNavBtn extends StatelessWidget {
   final bool isRight;
   const PdfPageNavBtn({

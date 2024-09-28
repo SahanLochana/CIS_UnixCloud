@@ -1,5 +1,5 @@
+import 'package:CIS_UnixCloud/core_features/presantation/Components/cato_tile_round.dart';
 import 'package:flutter/material.dart';
-import 'package:student_manegment_app/core_features/presantation/Components/cato_tile_round.dart';
 
 class CategoryRowWidget extends StatelessWidget {
   const CategoryRowWidget({super.key});
@@ -10,7 +10,7 @@ class CategoryRowWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CatoTileRound(
-          tielIcon: Icons.video_file,
+          assetsPath: "assets\\icons\\document.png",
           title: "Notes",
           type: "Notes",
         ),
@@ -18,7 +18,7 @@ class CategoryRowWidget extends StatelessWidget {
           width: 15,
         ),
         CatoTileRound(
-          tielIcon: Icons.book,
+          assetsPath: "assets\\icons\\slide.png",
           title: "Slides",
           type: "Slides",
         ),
@@ -26,9 +26,9 @@ class CategoryRowWidget extends StatelessWidget {
           width: 15,
         ),
         CatoTileRound(
-          tielIcon: Icons.book,
-          title: "Resouces",
-          type: "resouces",
+          assetsPath: "assets\\icons\\video.png",
+          title: "Records",
+          type: "Records",
         ),
         SizedBox(
           width: 15,

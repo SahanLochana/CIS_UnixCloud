@@ -1,16 +1,16 @@
+import 'package:CIS_UnixCloud/Routes/route_constant.dart';
+import 'package:CIS_UnixCloud/core_features/Provider/current_status_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:student_manegment_app/core_features/Provider/current_status_provider.dart';
-import 'package:student_manegment_app/Routes/route_constant.dart';
 
 class CatoTileRound extends StatelessWidget {
-  final IconData tielIcon;
+  final String assetsPath;
   final String title;
   final String type;
   const CatoTileRound(
       {super.key,
-      required this.tielIcon,
+      required this.assetsPath,
       required this.title,
       required this.type});
 
@@ -20,7 +20,7 @@ class CatoTileRound extends StatelessWidget {
       builder: (context, value, child) {
         return GestureDetector(
           onTap: () {
-            // store selected category
+            // store selected category.
             value.typeUpdater(type);
 
             // navigate to module page
@@ -37,14 +37,23 @@ class CatoTileRound extends StatelessWidget {
                   ),
                   height: 70,
                   width: 70,
-                  child: Icon(tielIcon),
+                  child: SizedBox(
+                    child: Center(
+                      child: Image.asset(
+                        height: 35,
+                        width: 35,
+                        assetsPath,
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 Text(
                   title,
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                  style: const TextStyle(
+                      color: Colors.white, fontSize: 16, fontFamily: "dmsans"),
                 )
               ],
             ),

@@ -1,12 +1,12 @@
+import 'package:CIS_UnixCloud/core_features/Data/Models/doc_modal.dart';
+import 'package:CIS_UnixCloud/core_features/Data/Models/module_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:student_manegment_app/core_features/Data/Models/doc_modal.dart';
-import 'package:student_manegment_app/core_features/Data/Models/module_model.dart';
 
 class FirebaseServices {
   var db = FirebaseFirestore.instance;
 
   // get modules
-  Future<List<ModuleModel>> getModules(String path) async {
+  Future<List<ModuleModel>> getModules() async {
     List<ModuleModel> modulesList = [];
     await db.collection("modules").get().then(
       (querySnapshot) {
@@ -25,6 +25,7 @@ class FirebaseServices {
     return modulesList;
   }
 
+  // Snapshot data convert to moduleModel
   ModuleModel toModuleModel(Map moduleData) {
     String moduleName = moduleData["moduleName"];
     String moduleId = moduleData["moduleId"];
@@ -39,7 +40,7 @@ class FirebaseServices {
         for (var docSnapshot in querySnapshot.docs) {
           Map docData = docSnapshot.data();
           if (docData.isEmpty) {
-            throw "File Not Found";
+            throw "Files Not Found";
           }
           DocDataModal docDataModel = toDocDataModal(docData);
           docsList.add(docDataModel);
@@ -51,6 +52,7 @@ class FirebaseServices {
     return docsList;
   }
 
+  // Snapshot data conver to DocDataModel
   DocDataModal toDocDataModal(Map docData) {
     String fileName = docData["fileName"];
     String url = docData["url"];

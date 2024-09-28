@@ -1,3 +1,4 @@
+import 'package:CIS_UnixCloud/features/upload_file/presentation/components/admin_page_tile.dart';
 import 'package:flutter/material.dart';
 
 class AdminBoard extends StatelessWidget {
@@ -8,7 +9,18 @@ class AdminBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("admin board"),
+        title: const Text(
+          "admin board",
+          style: TextStyle(fontFamily: "dmsans", color: Colors.white),
+        ),
+      ),
+      body: const Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Row(
+          children: [
+            AdminPageTile(),
+          ],
+        ),
       ),
     );
   }
