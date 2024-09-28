@@ -46,4 +46,4 @@ app.*.map.json
 pagination.drawio
 firebase_options.dart
 firebase.json
-google-services.json
+android/app/google-services.json
