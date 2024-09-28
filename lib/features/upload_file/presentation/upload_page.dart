@@ -180,15 +180,22 @@ class _PopUpWindowState extends State<PopUpWindow> {
                           controller: nameController,
                         ),
                       ],
-                    ), // TODO : add line to paste link
+                    ),
               const SizedBox(
                 height: 20,
               ),
               value.progress > 0 && selectedCategory != "records"
-                  ? LinearProgressIndicator(
-                      semanticsValue: value.progress.toString(),
-                      color: Colors.green.shade400,
-                      value: value.progress,
+                  ? Column(
+                      children: [
+                        LinearProgressIndicator(
+                          semanticsValue: value.progress.toString(),
+                          color: Colors.green.shade400,
+                          value: value.progress,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      ],
                     )
                   : Container(),
 

@@ -6,7 +6,7 @@ class WriteOnDB {
     switch (category) {
       case "notes":
         return "Notes";
-      case "Slides":
+      case "slides":
         return "Slides";
       case "records":
         return "Records";

@@ -34,12 +34,12 @@ class UploadFile {
           "modules/semester 01/$moduleId/$category/${pdfFile.names.single!}"
               .toLowerCase());
 
-      try {
-        await refToFile.getMetadata();
-        return;
-      } catch (e) {
-        debugPrint(e.toString());
-      }
+      // try {
+      //   await refToFile.getMetadata();
+      //   return;
+      // } catch (e) {
+      //   debugPrint(e.toString());
+      // }
 
       // upload
       final uploadTask = refToFile.putFile(file);

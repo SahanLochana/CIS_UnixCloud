@@ -3,7 +3,7 @@ description: "To the better way"
 
 publish_to: "none"
 
-version: 2.1.1+1
+version: 2.1.2+1
 
 environment:
   sdk: ">=3.3.1 <4.0.0"
