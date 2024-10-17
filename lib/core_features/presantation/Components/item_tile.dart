@@ -57,10 +57,12 @@ class _ItemTileState extends State<ItemTile> {
           ToastificationType.info,
         );
       } else {
-        msg.toastMsg(context, "File Alredy exists",
+        msg.toastMsg(context, "File Already exists",
             widget.docDataModal.fileName, ToastificationType.info);
       }
     }
+
+
 
     double deviceWidth = MediaQuery.sizeOf(context).width;
     CachingPdf cachingPdf = CachingPdf();
