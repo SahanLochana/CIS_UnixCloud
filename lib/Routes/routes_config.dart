@@ -5,6 +5,7 @@ import 'package:CIS_UnixCloud/core_features/presantation/Pages/home_page.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Pages/item_page.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Pages/modules_page.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Pages/pdf_view_page.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Pages/semesters_page.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Pages/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -86,6 +87,13 @@ class MyRouteConfig {
         name: RouterConstants.settingPageRouteName,
         pageBuilder: (context, state) {
           return const MaterialPage(child: SettingPage());
+        },
+      ),
+      GoRoute(
+        path: "/semesters",
+        name: RouterConstants.semestersPageRouteName,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: SemestersPage());
         },
       ),
     ],

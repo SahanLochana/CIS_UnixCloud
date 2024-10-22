@@ -9,7 +9,7 @@ class SemestersPage extends StatelessWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text(
-          "Modules",
+          "Semesters",
           style: TextStyle(fontFamily: "dmsans", color: Colors.white),
         ),
         centerTitle: true,

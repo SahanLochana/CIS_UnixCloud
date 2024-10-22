@@ -13,4 +13,6 @@ class RouterConstants {
   static const String adminBoardRouteName = "adminBoard";
   // setting page
   static const String settingPageRouteName = "settingPage";
+  // semesters page
+  static const String semestersPageRouteName = "semesterPage";
 }
