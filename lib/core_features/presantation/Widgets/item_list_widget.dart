@@ -29,7 +29,7 @@ class ItemListWidget extends StatelessWidget {
                 // when got error
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
-                // if ther no data
+                // if there no data
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                 return const Center(child: Text('No data available'));
               }
