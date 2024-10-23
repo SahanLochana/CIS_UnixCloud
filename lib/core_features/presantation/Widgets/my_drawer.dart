@@ -86,10 +86,15 @@ class MyDrawer extends StatelessWidget {
                     ListTile(
                       onTap: () async {
                         // clear before logout
-                        value.resetRole();
+                        //value.resetRole();
 
                         // logout
-                        await FirebaseAuth.instance.signOut();
+                        //await FirebaseAuth.instance.signOut();
+
+                        // TODO remove after test
+                        GoRouter.of(context).pushNamed(
+                          RouterConstants.semestersPageRouteName,
+                        );
                       },
                       leading: const Icon(Icons.book_rounded),
                       title: const Text(

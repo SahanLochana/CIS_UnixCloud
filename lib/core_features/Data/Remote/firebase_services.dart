@@ -25,6 +25,26 @@ class FirebaseServices {
     return modulesList;
   }
 
+  Future<List<String>> getSems() async {
+    List<String> semList = [];
+    await db.collection("semesters").get().then(
+      (querySnapshot) {
+        for (var docSnapshot in querySnapshot.docs) {
+          print(docSnapshot.data().toString());
+          Map docData = docSnapshot.data();
+          if (docData.isEmpty) {
+            throw "Data unavailable";
+          }
+
+          semList.add(docData["semName"]);
+        }
+      },
+      // ignore: avoid_print
+      onError: (e) => print("Error completing: $e"),
+    );
+    return semList;
+  }
+
   // Snapshot data convert to moduleModel
   ModuleModel toModuleModel(Map moduleData) {
     String moduleName = moduleData["moduleName"];

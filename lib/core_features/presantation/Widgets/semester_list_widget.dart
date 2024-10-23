@@ -1,20 +1,17 @@
-import 'package:CIS_UnixCloud/core_features/Data/Models/module_model.dart';
 import 'package:CIS_UnixCloud/core_features/Data/Remote/firebase_services.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Components/loading_wave.dart';
-import 'package:CIS_UnixCloud/core_features/presantation/Components/module_tile.dart';
+import 'package:CIS_UnixCloud/core_features/presantation/Components/semester_tile.dart';
 import 'package:flutter/material.dart';
 
-class ModuleListWidget extends StatelessWidget {
-  const ModuleListWidget({
-    super.key,
-  });
+class SemesterListWidget extends StatelessWidget {
+  const SemesterListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     FirebaseServices services = FirebaseServices();
     return FutureBuilder(
       // Get data from database.
-      future: services.getModules(),
+      future: services.getSems(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         // Show loading animation while data loading
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -28,15 +25,15 @@ class ModuleListWidget extends StatelessWidget {
         }
 
         // If has data show them in a list view builder
-        List<ModuleModel> moduleList = snapshot.data;
+        List<String> semList = snapshot.data;
         return ListView.builder(
-          itemCount: moduleList.length,
+          itemCount: semList.length,
           itemBuilder: (BuildContext context, int index) {
-            ModuleModel eachModuleModel = moduleList[index];
+            String eachSemName = semList[index];
             return Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
-              child: ModuleTile(
-                moduleModel: eachModuleModel,
+              child: SemesterTile(
+                semName: eachSemName,
               ),
             );
           },
