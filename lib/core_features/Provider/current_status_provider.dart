@@ -4,12 +4,19 @@ import 'package:flutter/material.dart';
 class StatusProvider extends ChangeNotifier {
   // verialble for store states
   String _selectedType = "";
+  String _selectedSem = "";
   bool _isAdmin = false;
   late String _uid;
 
   // for store user selected category (note,slide....)
   void typeUpdater(String type) {
     _selectedType = type;
+    notifyListeners();
+  }
+
+  // for store user selected category (note,slide....)
+  void semUpdater(String semNo) {
+    _selectedSem = semNo;
     notifyListeners();
   }
 
@@ -30,6 +37,7 @@ class StatusProvider extends ChangeNotifier {
 
   // getters
   String get selectedCategory => _selectedType;
+  String get selectedSem => _selectedSem;
   String get uid => _uid;
   bool get isUserAdmin => _isAdmin;
 }

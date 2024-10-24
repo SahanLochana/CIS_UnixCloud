@@ -33,7 +33,8 @@ class UploadProvider extends ChangeNotifier {
 
   Future<List<DropdownMenuItem<dynamic>>> fetchModules() async {
     FirebaseServices firebaseSer = FirebaseServices();
-    List<ModuleModel> moduleModals = await firebaseSer.getModules();
+    List<ModuleModel> moduleModals =
+        await firebaseSer.getModules("semester 01");
     modules = moduleModals.map((module) {
       return DropdownMenuItem<String>(
         value: module.moduleId.toLowerCase(),

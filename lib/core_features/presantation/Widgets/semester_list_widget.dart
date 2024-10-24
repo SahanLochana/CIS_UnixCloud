@@ -34,6 +34,7 @@ class SemesterListWidget extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 10.0),
               child: SemesterTile(
                 semName: eachSemName,
+                semNo: eachSemName,
               ),
             );
           },

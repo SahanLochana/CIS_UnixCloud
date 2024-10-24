@@ -39,7 +39,7 @@ class _ItemTileState extends State<ItemTile> {
 
     // cloud path
     final cloudPath =
-        "modules/semester 01/${widget.moduleId}/${stateProvider.selectedCategory}/${widget.docDataModal.fileName}"
+        "modules/${stateProvider.selectedSem.toLowerCase()}/${widget.moduleId}/${stateProvider.selectedCategory}/${widget.docDataModal.fileName}"
             .toLowerCase();
 
     void downloadFunc() async {
@@ -61,8 +61,6 @@ class _ItemTileState extends State<ItemTile> {
             widget.docDataModal.fileName, ToastificationType.info);
       }
     }
-
-
 
     double deviceWidth = MediaQuery.sizeOf(context).width;
     CachingPdf cachingPdf = CachingPdf();

@@ -6,12 +6,13 @@ class FirebaseServices {
   var db = FirebaseFirestore.instance;
 
   // get modules
-  Future<List<ModuleModel>> getModules() async {
+  Future<List<ModuleModel>> getModules(String semNo) async {
     List<ModuleModel> modulesList = [];
-    await db.collection("modules").get().then(
+    await db.collection("semesters/$semNo/modules").get().then(
       (querySnapshot) {
         for (var docSnapshot in querySnapshot.docs) {
           Map docData = docSnapshot.data();
+          print(docData.toString());
           if (docData.isEmpty) {
             throw "Data unavailable";
           }
@@ -53,9 +54,14 @@ class FirebaseServices {
   }
 
   // get document data
-  Future<List<DocDataModal>> getdocs(String moduleId, String category) async {
+  Future<List<DocDataModal>> getdocs(
+      String moduleId, String category, String semName) async {
     List<DocDataModal> docsList = [];
-    await db.collection("modules/$moduleId/$category").get().then(
+    await db
+        .collection(
+            "semesters/${semName.toLowerCase()}/modules/$moduleId/$category")
+        .get()
+        .then(
       (querySnapshot) {
         for (var docSnapshot in querySnapshot.docs) {
           Map docData = docSnapshot.data();
@@ -72,7 +78,7 @@ class FirebaseServices {
     return docsList;
   }
 
-  // Snapshot data conver to DocDataModel
+  // Snapshot data convert to DocDataModel
   DocDataModal toDocDataModal(Map docData) {
     String fileName = docData["fileName"];
     String url = docData["url"];

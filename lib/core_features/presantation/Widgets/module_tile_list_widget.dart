@@ -5,8 +5,10 @@ import 'package:CIS_UnixCloud/core_features/presantation/Components/module_tile.
 import 'package:flutter/material.dart';
 
 class ModuleListWidget extends StatelessWidget {
+  final String semName;
   const ModuleListWidget({
     super.key,
+    required this.semName,
   });
 
   @override
@@ -14,7 +16,7 @@ class ModuleListWidget extends StatelessWidget {
     FirebaseServices services = FirebaseServices();
     return FutureBuilder(
       // Get data from database.
-      future: services.getModules(),
+      future: services.getModules(semName.toLowerCase()),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         // Show loading animation while data loading
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -29,6 +31,7 @@ class ModuleListWidget extends StatelessWidget {
 
         // If has data show them in a list view builder
         List<ModuleModel> moduleList = snapshot.data;
+        print(semName);
         return ListView.builder(
           itemCount: moduleList.length,
           itemBuilder: (BuildContext context, int index) {

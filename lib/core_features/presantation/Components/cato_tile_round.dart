@@ -24,7 +24,8 @@ class CatoTileRound extends StatelessWidget {
             value.typeUpdater(type);
 
             // navigate to module page
-            GoRouter.of(context).pushNamed(RouterConstants.modulesRouteName);
+            GoRouter.of(context)
+                .pushNamed(RouterConstants.semestersPageRouteName);
           },
           child: SizedBox(
             width: 80,

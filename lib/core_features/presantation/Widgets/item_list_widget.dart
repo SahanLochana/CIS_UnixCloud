@@ -20,8 +20,9 @@ class ItemListWidget extends StatelessWidget {
     return Consumer<StatusProvider>(
       builder: (context, value, child) {
         String category = value.selectedCategory;
+        String semName = value.selectedSem;
         return FutureBuilder(
-            future: services.getdocs(moduleId, category),
+            future: services.getdocs(moduleId, category, semName),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               // show loading animation while data load
               if (snapshot.connectionState == ConnectionState.waiting) {
