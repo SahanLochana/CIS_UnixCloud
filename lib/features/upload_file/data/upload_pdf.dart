@@ -18,6 +18,7 @@ class UploadFile {
     BuildContext context,
     String moduleId,
     String category,
+    String semName,
     FilePickerResult pdfFile,
     Function(double) onProgress,
   ) async {
@@ -31,15 +32,8 @@ class UploadFile {
 
       // storage path to save
       Reference refToFile = storageRef.child(
-          "modules/semester 01/$moduleId/$category/${pdfFile.names.single!}"
+          "modules/$semName/$moduleId/$category/${pdfFile.names.single!}"
               .toLowerCase());
-
-      // try {
-      //   await refToFile.getMetadata();
-      //   return;
-      // } catch (e) {
-      //   debugPrint(e.toString());
-      // }
 
       // upload
       final uploadTask = refToFile.putFile(file);
@@ -72,7 +66,7 @@ class UploadFile {
                 return;
               }
               await writeOnDB.writeOnDB(
-                  moduleId, category, pdfFile.names.single!, url);
+                  moduleId, category, pdfFile.names.single!, url, semName);
 
               onProgress(0.0);
               break;

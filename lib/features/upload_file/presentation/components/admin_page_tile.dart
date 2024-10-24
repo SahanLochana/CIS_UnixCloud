@@ -1,5 +1,4 @@
 import 'package:CIS_UnixCloud/features/upload_file/presentation/upload_page.dart';
-import 'package:CIS_UnixCloud/features/upload_file/provider/upload_provider.dart';
 import 'package:flutter/material.dart';
 
 class AdminPageTile extends StatelessWidget {
@@ -15,24 +14,16 @@ class AdminPageTile extends StatelessWidget {
       onPressed: () {
         // UploadProvider uProvider = UploadProvider();
         // uProvider.fetchModules();
-        Navigator.of(context).push(MaterialPageRoute(
+        Navigator.of(context).push(
+          MaterialPageRoute(
             builder: (context) => PopUpWindow(
-                  onChangedModuleId: (moduleId) {
-                    moduleId = moduleId!;
-                  },
-                  onChangedCategory: (category) {
-                    category = category!;
-                  },
-                )));
-        showDialog(
-          context: context,
-          builder: (context) => PopUpWindow(
-            onChangedCategory: (category) {
-              category = category!;
-            },
-            onChangedModuleId: (moduleId) {
-              moduleId = moduleId!;
-            },
+              onChangedModuleId: (moduleId) {
+                moduleId = moduleId!;
+              },
+              onChangedCategory: (category) {
+                category = category!;
+              },
+            ),
           ),
         );
       },

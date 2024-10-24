@@ -135,13 +135,17 @@ class _ItemTileState extends State<ItemTile> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(
-                  "assets\\icons\\pdf round.png",
-                  height: 25,
-                  width: 25,
-                ),
-                const SizedBox(
-                  width: 10,
+                Row(
+                  children: [
+                    Image.asset(
+                      "assets\\icons\\pdf round.png",
+                      height: 25,
+                      width: 25,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                  ],
                 ),
                 SizedBox(
                   width: deviceWidth - 155,
@@ -152,13 +156,10 @@ class _ItemTileState extends State<ItemTile> {
                   ),
                 ),
                 showBar == 1
-                    ? IconButton(
-                        onPressed: () async {
-                          FileDownload download = FileDownload();
-                          await download.cancalTask(downloadProvider
-                              .downloadTask["widget.docDataModal.fileName"]);
-                        },
-                        icon: const Icon(Icons.close))
+                    ? const SizedBox(
+                        height: 25,
+                        width: 45,
+                      )
                     : IconButton(
                         onPressed: () async {
                           int sdkVer = await GetInfo().getAndroidVersion();
@@ -175,7 +176,8 @@ class _ItemTileState extends State<ItemTile> {
                             height: 20,
                             width: 20,
                           ),
-                        ))
+                        ),
+                      )
               ],
             ),
             showBar == 1

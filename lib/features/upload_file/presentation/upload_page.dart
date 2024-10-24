@@ -32,6 +32,7 @@ class _PopUpWindowState extends State<PopUpWindow> {
   WriteOnDB writeOnDB = WriteOnDB();
 
   String? selectedModuleId;
+  String selectedSem = "semester 02";
   String selectedCategory = "notes";
   String? filename;
   FilePickerResult? pickedFile;
@@ -43,7 +44,8 @@ class _PopUpWindowState extends State<PopUpWindow> {
         selectedModuleId!,
         selectedCategory,
         "${selectedModuleId!.toUpperCase()} ${nameController.text} Record",
-        linkController.text);
+        linkController.text,
+        selectedSem);
     msg.toastMsg(
         // ignore: use_build_context_synchronously
         context,
@@ -68,7 +70,7 @@ class _PopUpWindowState extends State<PopUpWindow> {
           ),
         ),
         body: FutureBuilder(
-          future: UploadProvider().fetchModules(),
+          future: UploadProvider().fetchModules(selectedSem),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             // show loading animation while data load
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -93,6 +95,29 @@ class _PopUpWindowState extends State<PopUpWindow> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // semester picker
+                  DropdownButton(
+                      borderRadius: BorderRadius.circular(10),
+                      style: _style,
+                      value: selectedSem,
+                      items: const [
+                        DropdownMenuItem(
+                            value: "semester 01", child: Text("Semester 01")),
+                        DropdownMenuItem(
+                            value: "semester 02", child: Text("Semester 02")),
+                        DropdownMenuItem(
+                            value: "semester 03", child: Text("Semester 03")),
+                      ],
+                      onChanged: (sem) {
+                        print(sem);
+                        print(selectedSem);
+                        setState(() {
+                          selectedSem = sem!;
+                          selectedModuleId = null;
+                        });
+                        widget.onChangedCategory(sem);
+                      }),
+
                   // category
                   DropdownButton(
                       borderRadius: BorderRadius.circular(10),
@@ -221,6 +246,7 @@ class _PopUpWindowState extends State<PopUpWindow> {
                                             context,
                                             selectedModuleId!,
                                             selectedCategory,
+                                            selectedSem,
                                             pickedFile!);
                                       } catch (e) {
                                         if (e.toString() ==

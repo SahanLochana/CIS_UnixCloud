@@ -15,6 +15,7 @@ class UploadProvider extends ChangeNotifier {
     BuildContext context,
     String moduleId,
     String category,
+    String semName,
     FilePickerResult pdfFile,
   ) {
     UploadFile uploadClass = UploadFile();
@@ -22,6 +23,7 @@ class UploadProvider extends ChangeNotifier {
       context,
       moduleId,
       category,
+      semName,
       pdfFile,
       (progress) {
         _currentProgress = progress;
@@ -31,10 +33,9 @@ class UploadProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<DropdownMenuItem<dynamic>>> fetchModules() async {
+  Future<List<DropdownMenuItem<dynamic>>> fetchModules(String semName) async {
     FirebaseServices firebaseSer = FirebaseServices();
-    List<ModuleModel> moduleModals =
-        await firebaseSer.getModules("semester 01");
+    List<ModuleModel> moduleModals = await firebaseSer.getModules(semName);
     modules = moduleModals.map((module) {
       return DropdownMenuItem<String>(
         value: module.moduleId.toLowerCase(),
