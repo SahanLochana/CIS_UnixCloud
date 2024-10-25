@@ -1,4 +1,3 @@
-import 'package:CIS_UnixCloud/core_features/presantation/Components/semester_tile.dart';
 import 'package:CIS_UnixCloud/core_features/presantation/Widgets/semester_list_widget.dart';
 import 'package:flutter/material.dart';
 

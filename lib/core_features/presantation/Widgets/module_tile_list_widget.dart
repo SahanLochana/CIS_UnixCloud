@@ -31,7 +31,6 @@ class ModuleListWidget extends StatelessWidget {
 
         // If has data show them in a list view builder
         List<ModuleModel> moduleList = snapshot.data;
-        print(semName);
         return ListView.builder(
           itemCount: moduleList.length,
           itemBuilder: (BuildContext context, int index) {

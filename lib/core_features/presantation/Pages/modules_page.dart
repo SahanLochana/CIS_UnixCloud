@@ -21,7 +21,7 @@ class ModulePage extends StatelessWidget {
           centerTitle: true,
         ),
         body: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           child: ModuleListWidget(
             semName: value.selectedSem,
           ),

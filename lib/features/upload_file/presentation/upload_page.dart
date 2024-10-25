@@ -115,8 +115,6 @@ class _PopUpWindowState extends State<PopUpWindow> {
                                 child: Text("Semester 03")),
                           ],
                           onChanged: (sem) {
-                            print(sem);
-                            print(selectedSem);
                             setState(() {
                               selectedSem = sem!;
                               selectedModuleId = null;
@@ -152,7 +150,6 @@ class _PopUpWindowState extends State<PopUpWindow> {
                           value: selectedModuleId,
                           items: itemList,
                           onChanged: (module) {
-                            print(module.toString());
                             setState(() {
                               selectedModuleId = module!;
                             });
@@ -279,7 +276,7 @@ class _PopUpWindowState extends State<PopUpWindow> {
                                         msg.toastMsg(
                                             context,
                                             "Error",
-                                            "Somthing went wrong !",
+                                            "Something went wrong !",
                                             ToastificationType.error);
                                       }
                                     }

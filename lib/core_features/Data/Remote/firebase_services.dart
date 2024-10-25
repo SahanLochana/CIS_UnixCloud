@@ -12,7 +12,6 @@ class FirebaseServices {
       (querySnapshot) {
         for (var docSnapshot in querySnapshot.docs) {
           Map docData = docSnapshot.data();
-          print(docData.toString());
           if (docData.isEmpty) {
             throw "Data unavailable";
           }
@@ -31,7 +30,6 @@ class FirebaseServices {
     await db.collection("semesters").get().then(
       (querySnapshot) {
         for (var docSnapshot in querySnapshot.docs) {
-          print(docSnapshot.data().toString());
           Map docData = docSnapshot.data();
           if (docData.isEmpty) {
             throw "Data unavailable";

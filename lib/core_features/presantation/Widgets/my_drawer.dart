@@ -89,12 +89,7 @@ class MyDrawer extends StatelessWidget {
                         //value.resetRole();
 
                         // logout
-                        //await FirebaseAuth.instance.signOut();
-
-                        // TODO remove after test
-                        GoRouter.of(context).pushNamed(
-                          RouterConstants.semestersPageRouteName,
-                        );
+                        await FirebaseAuth.instance.signOut();
                       },
                       leading: const Icon(Icons.book_rounded),
                       title: const Text(
