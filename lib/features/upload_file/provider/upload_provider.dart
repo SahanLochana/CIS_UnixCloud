@@ -6,10 +6,9 @@ import 'package:flutter/material.dart';
 
 class UploadProvider extends ChangeNotifier {
   double _currentProgress = 0;
-  List<DropdownMenuItem> modules = [];
 
   double get progress => _currentProgress;
-  List<DropdownMenuItem> get moduleItems => modules;
+  // List<DropdownMenuItem> get moduleItems => modules;
 
   void progressListener(
     BuildContext context,
@@ -33,15 +32,32 @@ class UploadProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<DropdownMenuItem<dynamic>>> fetchModules(String semName) async {
+  Future<Map<String, List<DropdownMenuItem>>> fetchModules(
+      String semName) async {
+    List<DropdownMenuItem> modules = [];
+    List<DropdownMenuItem> sems = [];
+    Map<String, List<DropdownMenuItem>> returndata = {};
+
     FirebaseServices firebaseSer = FirebaseServices();
     List<ModuleModel> moduleModals = await firebaseSer.getModules(semName);
+    List<String> semesters = await firebaseSer.getSems();
+
     modules = moduleModals.map((module) {
       return DropdownMenuItem<String>(
         value: module.moduleId.toLowerCase(),
         child: Text(module.moduleId),
       );
     }).toList();
-    return modules;
+
+    sems = semesters.map((sem) {
+      return DropdownMenuItem<String>(
+        value: sem.toLowerCase(),
+        child: Text(sem),
+      );
+    }).toList();
+
+    returndata["modules"] = modules;
+    returndata["sems"] = sems;
+    return returndata;
   }
 }

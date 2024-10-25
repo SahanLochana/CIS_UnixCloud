@@ -33,7 +33,8 @@ class _PopUpWindowState extends State<PopUpWindow> {
 
   String? selectedModuleId;
   String? defaultModuleId;
-  String selectedSem = "semester 02";
+  String? defaultSem;
+  String selectedSem = "semester 01";
   String selectedCategory = "notes";
   String? filename;
   FilePickerResult? pickedFile;
@@ -91,29 +92,24 @@ class _PopUpWindowState extends State<PopUpWindow> {
                   }
 
                   // if has data
-                  List<DropdownMenuItem> itemList = snapshot.data;
+                  List<DropdownMenuItem> itemList = snapshot.data["modules"];
                   if (selectedModuleId == null && itemList.isNotEmpty) {
                     selectedModuleId = itemList[0].value; // Set a default value
                     defaultModuleId = itemList[0].value;
                   }
-                  // semester picker
+                  List<DropdownMenuItem> semList = snapshot.data["sems"];
+                  if (selectedModuleId == null && itemList.isNotEmpty) {
+                    selectedSem = semList[0].value; // Set a default value
+                    defaultSem = semList[0].value;
+                  }
                   return Column(
                     children: [
+                      // semester picker
                       DropdownButton(
                           borderRadius: BorderRadius.circular(10),
                           style: _style,
                           value: selectedSem,
-                          items: const [
-                            DropdownMenuItem(
-                                value: "semester 01",
-                                child: Text("Semester 01")),
-                            DropdownMenuItem(
-                                value: "semester 02",
-                                child: Text("Semester 02")),
-                            DropdownMenuItem(
-                                value: "semester 03",
-                                child: Text("Semester 03")),
-                          ],
+                          items: semList,
                           onChanged: (sem) {
                             setState(() {
                               selectedSem = sem!;
