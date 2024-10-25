@@ -20,7 +20,7 @@ class DrawerTile extends StatelessWidget {
       builder: (context, value, child) => ListTile(
         onTap: () {
           value.typeUpdater(type);
-          GoRouter.of(context).pushNamed(RouterConstants.modulesRouteName);
+          GoRouter.of(context).pushNamed(RouterConstants.semestersPageRouteName);
         },
         leading: Image.asset(
           imagePath,
