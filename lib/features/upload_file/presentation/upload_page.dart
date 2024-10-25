@@ -32,6 +32,7 @@ class _PopUpWindowState extends State<PopUpWindow> {
   WriteOnDB writeOnDB = WriteOnDB();
 
   String? selectedModuleId;
+  String? defaultModuleId;
   String selectedSem = "semester 02";
   String selectedCategory = "notes";
   String? filename;
@@ -61,233 +62,250 @@ class _PopUpWindowState extends State<PopUpWindow> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UploadProvider>(
-      builder: (context, value, child) => Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "Upload files",
-            style: TextStyle(color: Colors.white, fontFamily: "dmsans"),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Upload files",
+          style: TextStyle(color: Colors.white, fontFamily: "dmsans"),
         ),
-        body: FutureBuilder(
-          future: UploadProvider().fetchModules(selectedSem),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            // show loading animation while data load
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: LoadingWave());
-              // when got error
-            } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
-              // if there no data
-            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('No data available'));
-            }
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FutureBuilder(
+                future: UploadProvider().fetchModules(selectedSem),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  // show loading animation while data load
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: LoadingWave());
+                    // when got error
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                    // if there no data
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Center(child: Text('No data available'));
+                  }
 
-            // if has data
-            List<DropdownMenuItem> itemList = snapshot.data;
-            if (selectedModuleId == null && itemList.isNotEmpty) {
-              selectedModuleId = itemList[0].value; // Set a default value
-            }
-            return Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
+                  // if has data
+                  List<DropdownMenuItem> itemList = snapshot.data;
+                  if (selectedModuleId == null && itemList.isNotEmpty) {
+                    selectedModuleId = itemList[0].value; // Set a default value
+                    defaultModuleId = itemList[0].value;
+                  }
                   // semester picker
-                  DropdownButton(
-                      borderRadius: BorderRadius.circular(10),
-                      style: _style,
-                      value: selectedSem,
-                      items: const [
-                        DropdownMenuItem(
-                            value: "semester 01", child: Text("Semester 01")),
-                        DropdownMenuItem(
-                            value: "semester 02", child: Text("Semester 02")),
-                        DropdownMenuItem(
-                            value: "semester 03", child: Text("Semester 03")),
-                      ],
-                      onChanged: (sem) {
-                        print(sem);
-                        print(selectedSem);
-                        setState(() {
-                          selectedSem = sem!;
-                          selectedModuleId = null;
-                        });
-                        widget.onChangedCategory(sem);
-                      }),
-
-                  // category
-                  DropdownButton(
-                      borderRadius: BorderRadius.circular(10),
-                      style: _style,
-                      value: selectedCategory,
-                      items: const [
-                        DropdownMenuItem(value: "notes", child: Text("Notes")),
-                        DropdownMenuItem(
-                            value: "slides", child: Text("Slides")),
-                        DropdownMenuItem(
-                            value: "records", child: Text("Records")),
-                      ],
-                      onChanged: (category) {
-                        setState(() {
-                          selectedCategory = category!;
-                        });
-                        widget.onChangedCategory(category);
-                      }),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  // module ID
-                  DropdownButton(
-                      isExpanded: false,
-                      borderRadius: BorderRadius.circular(10),
-                      style: _style,
-                      value: selectedModuleId,
-                      items: itemList,
-                      onChanged: (module) {
-                        print(module.toString());
-                        setState(() {
-                          selectedModuleId = module!;
-                        });
-                        widget.onChangedModuleId(module);
-                      }),
-                  const SizedBox(
-                    height: 20,
-                  ),
-
-                  // placeholder for file name
-                  if (filename != null)
-                    Column(
-                      children: [
-                        Text(filename!),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                      ],
-                    ),
-                  //
-
-                  // file pick btn
-                  selectedCategory != "records"
-                      ? ElevatedButton(
-                          onPressed: () async {
-                            GetFile pickFile = GetFile();
-                            FilePickerResult? result =
-                                await pickFile.getPdfFile();
-                            setState(() {
-                              pickedFile = result;
-                              filename = result!.names.single;
-                            });
-                          },
-                          style: ButtonStyle(
-                            backgroundColor:
-                                const WidgetStatePropertyAll(Color(0xFF3D5A80)),
-                            elevation: const WidgetStatePropertyAll(0),
-                            shape: WidgetStatePropertyAll(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                          ),
-                          child: const Text("Choose a file..",
-                              style: TextStyle(
-                                fontFamily: "dmsans",
-                                color: Colors.white,
-                              )),
-                        )
-                      : Column(
-                          children: [
-                            LinkPastefield(
-                              hintText: "telegram link",
-                              controller: linkController,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            LinkPastefield(
-                              hintText: "Date and time (optional : part)",
-                              controller: nameController,
-                            ),
-                          ],
-                        ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  value.progress > 0 && selectedCategory != "records"
-                      ? Column(
-                          children: [
-                            LinearProgressIndicator(
-                              semanticsValue: value.progress.toString(),
-                              color: Colors.green.shade400,
-                              value: value.progress,
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                          ],
-                        )
-                      : Container(),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                  return Column(
                     children: [
-                      PopUpActionBtn(
-                          btnTitle: "Upload",
-                          onPressed: value.progress > 0
-                              ? () {}
-                              : selectedCategory != "records"
-                                  ? () {
-                                      try {
-                                        msg.toastMsg(context, "File Uploading",
-                                            filename!, ToastificationType.info);
-                                        value.progressListener(
-                                            context,
-                                            selectedModuleId!,
-                                            selectedCategory,
-                                            selectedSem,
-                                            pickedFile!);
-                                      } catch (e) {
-                                        if (e.toString() ==
-                                            "Null check operator used on a null value") {
-                                          msg.toastMsg(
-                                              context,
-                                              "File not selected",
-                                              "Please select a file",
-                                              ToastificationType.error);
-                                        } else {
-                                          msg.toastMsg(
-                                              context,
-                                              "Error",
-                                              "Somthing went wrong !",
-                                              ToastificationType.error);
-                                        }
-                                      }
-                                    }
-                                  : () {
-                                      writeToDB();
-                                    }),
+                      DropdownButton(
+                          borderRadius: BorderRadius.circular(10),
+                          style: _style,
+                          value: selectedSem,
+                          items: const [
+                            DropdownMenuItem(
+                                value: "semester 01",
+                                child: Text("Semester 01")),
+                            DropdownMenuItem(
+                                value: "semester 02",
+                                child: Text("Semester 02")),
+                            DropdownMenuItem(
+                                value: "semester 03",
+                                child: Text("Semester 03")),
+                          ],
+                          onChanged: (sem) {
+                            print(sem);
+                            print(selectedSem);
+                            setState(() {
+                              selectedSem = sem!;
+                              selectedModuleId = null;
+                            });
+                            widget.onChangedCategory(sem);
+                          }),
+                      DropdownButton(
+                          borderRadius: BorderRadius.circular(10),
+                          style: _style,
+                          value: selectedCategory,
+                          items: const [
+                            DropdownMenuItem(
+                                value: "notes", child: Text("Notes")),
+                            DropdownMenuItem(
+                                value: "slides", child: Text("Slides")),
+                            DropdownMenuItem(
+                                value: "records", child: Text("Records")),
+                          ],
+                          onChanged: (category) {
+                            setState(() {
+                              selectedCategory = category!;
+                            });
+                            widget.onChangedCategory(category);
+                          }),
                       const SizedBox(
-                        width: 20,
+                        height: 20,
                       ),
-                      PopUpActionBtn(
-                        btnTitle: "Reset",
-                        onPressed: () {
-                          setState(() {
-                            selectedModuleId = itemList[0].value;
-                            selectedCategory = "notes";
-                            filename = null;
-                            pickedFile = null;
-                          });
-                        },
-                      ),
+                      // module ID
+                      DropdownButton(
+                          isExpanded: false,
+                          borderRadius: BorderRadius.circular(10),
+                          style: _style,
+                          value: selectedModuleId,
+                          items: itemList,
+                          onChanged: (module) {
+                            print(module.toString());
+                            setState(() {
+                              selectedModuleId = module!;
+                            });
+                            widget.onChangedModuleId(module);
+                          }),
                     ],
+                  );
+                }),
+
+            // category
+
+            const SizedBox(
+              height: 20,
+            ),
+
+            // placeholder for file name
+            if (filename != null)
+              Column(
+                children: [
+                  Text(filename!),
+                  const SizedBox(
+                    height: 20,
                   ),
                 ],
               ),
-            );
-          },
+            //
+
+            // file pick btn
+            selectedCategory != "records"
+                ? ElevatedButton(
+                    onPressed: () async {
+                      GetFile pickFile = GetFile();
+                      FilePickerResult? result = await pickFile.getPdfFile();
+                      setState(() {
+                        pickedFile = result;
+                        filename = result!.names.single;
+                      });
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          const WidgetStatePropertyAll(Color(0xFF3D5A80)),
+                      elevation: const WidgetStatePropertyAll(0),
+                      shape: WidgetStatePropertyAll(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    child: const Text("Choose a file..",
+                        style: TextStyle(
+                          fontFamily: "dmsans",
+                          color: Colors.white,
+                        )),
+                  )
+                : Column(
+                    children: [
+                      LinkPastefield(
+                        hintText: "telegram link",
+                        controller: linkController,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      LinkPastefield(
+                        hintText: "Date and time (optional : part)",
+                        controller: nameController,
+                      ),
+                    ],
+                  ),
+            const SizedBox(
+              height: 20,
+            ),
+            Selector<UploadProvider, double>(
+              selector: (_, provider) => provider.progress,
+              builder: (context, progress, child) {
+                if (progress > 0 && selectedCategory != "records") {
+                  return Column(
+                    children: [
+                      LinearProgressIndicator(
+                        semanticsValue: progress.toString(),
+                        color: Colors.green.shade400,
+                        value: progress,
+                      ),
+                      const SizedBox(height: 20),
+                    ],
+                  );
+                }
+                return Container();
+              },
+            ),
+
+            Selector<UploadProvider, double>(
+              selector: (_, provider) => provider.progress,
+              builder: (context, progress, child) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    PopUpActionBtn(
+                        btnTitle: "Upload",
+                        onPressed: progress > 0
+                            ? () {}
+                            : selectedCategory != "records"
+                                ? () {
+                                    try {
+                                      msg.toastMsg(context, "File Uploading",
+                                          filename!, ToastificationType.info);
+                                      context
+                                          .read<UploadProvider>()
+                                          .progressListener(
+                                              context,
+                                              selectedModuleId!,
+                                              selectedCategory,
+                                              selectedSem,
+                                              pickedFile!);
+                                    } catch (e) {
+                                      if (e.toString() ==
+                                          "Null check operator used on a null value") {
+                                        msg.toastMsg(
+                                            context,
+                                            "File not selected",
+                                            "Please select a file",
+                                            ToastificationType.error);
+                                      } else {
+                                        msg.toastMsg(
+                                            context,
+                                            "Error",
+                                            "Somthing went wrong !",
+                                            ToastificationType.error);
+                                      }
+                                    }
+                                  }
+                                : () {
+                                    writeToDB();
+                                  }),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    PopUpActionBtn(
+                      btnTitle: "Reset",
+                      onPressed: () {
+                        setState(() {
+                          selectedModuleId = defaultModuleId;
+                          selectedCategory = "notes";
+                          filename = null;
+                          pickedFile = null;
+                        });
+                      },
+                    ),
+                  ],
+                );
+              },
+            )
+          ],
         ),
       ),
     );
